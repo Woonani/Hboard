@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const chkBtn02 = document.querySelector("#member_chk02")
     const chkBtn03 = document.querySelector("#member_chk03")
     const nxtBtn = document.querySelector("#member_nxtBtn")
-    const form = document.stipulation_form;
+    const form = document.step01_form;
 
     chkBtn01.addEventListener("click", ()=>{
         if(chkBtn01.checked == true &&chkBtn02.checked == true){
@@ -39,12 +39,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     nxtBtn.addEventListener("click", ()=>{
         if(chkBtn03.checked==true){
-            // console.log("form",form);
             form.mode.value = "step_02";
+            // console.log("form",form);
             form.submit();
         }else{
             alert("이용약관에 모두 동의하셔야 다음단계로 진행이 가능합니다.")
         }
     })
+    
 
 })
