@@ -4,32 +4,8 @@
 <!--[if (IE 7)]><html class="no-js ie7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"><![endif]-->
 <!--[if (IE 8)]><html class="no-js ie8" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"><![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" id="X-UA-Compatible" content="IE=EmulateIE8" />
-<title>해커스 HRD</title>
-<meta name="description" content="해커스 HRD" />
-<meta name="keywords" content="해커스, HRD" />
+<?php include "./app/views/include/head.html" ?>
 
-<!-- 파비콘설정 -->
-<link rel="shortcut icon" type="image/x-icon" href="http://img.hackershrd.com/common/favicon.ico" />
-
-<!-- xhtml property속성 벨리데이션 오류/확인필요 -->
-<meta property="og:title" content="해커스 HRD" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://www.hackershrd.com/" />
-<meta property="og:image" content="http://img.hackershrd.com/common/og_logo.png" />
-
-<link type="text/css" rel="stylesheet" href="http://q.hackershrd.com/worksheet/css/common.css" />
-<link type="text/css" rel="stylesheet" href="http://q.hackershrd.com/worksheet/css/bxslider.css" />
-<link type="text/css" rel="stylesheet" href="http://q.hackershrd.com/worksheet/css/main.css" /><!-- main페이지에만 호출 -->
-<link type="text/css" rel="stylesheet" href="http://q.hackershrd.com/worksheet/css/sub.css" /><!-- sub페이지에만 호출 -->
-<link type="text/css" rel="stylesheet" href="http://q.hackershrd.com/worksheet/css/login.css" /><!-- login페이지에만 호출 -->
-
-<script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/plugins/bxslider/jquery.bxslider.min.js"></script>
-<script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/plugins/bxslider/bxslider.js"></script>
-<script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/ui.js"></script>
-<!--[if lte IE 9]> <script src="/js/common/place_holder.js"></script> <![endif]-->
 
 </head><body>
 <!-- skip nav -->
@@ -161,108 +137,45 @@
 	<div id="content" class="content">
 		<div class="inner">
 			<div class="tit-box-h3">
-				<h3 class="tit-h3">아이디/비밀번호 찾기</h3>
+				<h3 class="tit-h3">회원가입</h3>
 				<div class="sub-depth">
 					<span><i class="icon-home"><span>홈</span></i></span>
-					<strong>아이디/비밀번호 찾기</strong>
+					<strong>회원가입 완료</strong>
 				</div>
 			</div>
 
-			<ul class="tab-list">
-				<li><a href="#">아이디 찾기</a></li>
-				<li class="on"><a href="#">비밀번호 찾기</a></li>
-			</ul>
+			<div class="join-step-bar">
+				<ul>
+					<li><i class="icon-join-agree"></i> 약관동의</li>
+					<li class="on"><i class="icon-join-chk"></i> 본인확인</li>
+					<li class="last"><i class="icon-join-inp"></i> 정보입력</li>
+				</ul>
+			</div>
 
 			<div class="tit-box-h4">
-				<h3 class="tit-h4">비밀번호 찾기 방법 선택</h3>
+				<h3 class="tit-h4">본인인증</h3>
 			</div>
 
-			<dl class="find-box">
-				<dt>휴대폰 인증</dt>
-				<dd>
-					고객님이 회원 가입 시 등록한 휴대폰 번호와 입력하신 휴대폰 번호가 동일해야 합니다.
-					<label class="input-sp big">
-						<input type="radio" name="radio" checked="checked"/>
-						<span class="input-txt"></span>
-					</label>
-				</dd>
-			</dl>
+			<div class="section-content after">
+				<div class="identify-box" style="width:100%;height:190px;">
+					<div class="identify-inner">
+						<strong>휴대폰 인증</strong>
+						<p>주민번호 없이 메시지 수신가능한 휴대폰으로 1개 아이디만 회원가입이 가능합니다. </p>
 
-			<dl class="find-box">
-				<dt>이메일 인증</dt>
-				<dd>
-					고객님이 회원 가입 시 등록한 이메일 주소와 입력하신 이메일 주소가 동일해야 합니다.
-					<label class="input-sp big">
-						<input type="radio" name="radio"/>
-						<span class="input-txt"></span>
-					</label>
-				</dd>
-			</dl>
+						<br />
+						<input type="text" class="input-text" style="width:50px"/> - 
+						<input type="text" class="input-text" style="width:50px"/> - 
+						<input type="text" class="input-text" style="width:50px"/>
+						<a href="#" class="btn-s-line">인증번호 받기</a>
 
-			<div class="section-content mt30">
-				<table border="0" cellpadding="0" cellspacing="0" class="tbl-col-join">
-					<caption class="hidden">아이디/비밀번호 찾기 개인정보입력</caption>
-					<colgroup>
-						<col style="width:15%"/>
-						<col style="*"/>
-					</colgroup>
-
-					<tbody>
-						<tr>
-							<th scope="col">성명</th>
-							<td><input type="text" class="input-text" style="width:302px" /></td>
-						</tr>
-						<tr>
-							<th scope="col">아이디</th>
-							<td>
-								<select class="input-sel" style="width:148px">
-									<option value="">선택</option>
-									<option value="">선택입력</option>
-									<option value="">선택입력</option>
-									<option value="">선택입력</option>
-									<option value="">선택입력</option>
-								</select>
-								년
-								<select class="input-sel" style="width:147px">
-									<option value="">선택</option>
-									<option value="">선택입력</option>
-									<option value="">선택입력</option>
-									<option value="">선택입력</option>
-									<option value="">선택입력</option>
-								</select>
-								월
-								<select class="input-sel" style="width:147px">
-									<option value="">선택</option>
-									<option value="">선택입력</option>
-									<option value="">선택입력</option>
-									<option value="">선택입력</option>
-									<option value="">선택입력</option>
-								</select>
-								일
-							</td>
-						</tr>
-						<tr>
-							<th scope="col">이메일주소</th>
-							<td>
-								<input type="text" class="input-text" style="width:138px"/> @ <input type="text" class="input-text" style="width:138px"/>
-								<select class="input-sel" style="width:160px">
-									<option value="">선택입력</option>
-									<option value="">선택입력</option>
-									<option value="">선택입력</option>
-									<option value="">선택입력</option>
-									<option value="">선택입력</option>
-								</select>
-								<a href="#" class="btn-s-tin ml10">인증번호 받기</a>
-							</td>
-						</tr>
-						<tr>
-							<th scope="col">인증번호</th>
-							<td><input type="text" class="input-text" style="width:478px" /><a href="#" class="btn-s-tin ml10">인증번호 확인</a></td>
-						</tr>
-					</tbody>
-				</table>
-
+						<br /><br />
+						<input type="text" class="input-text" style="width:200px"/>
+						<a href="#" class="btn-s-line">인증번호 확인</a>
+					</div>
+					<i class="graphic-phon"><span>휴대폰 인증</span></i>
+				</div>
 			</div>
+
 		</div>
 	</div>
 </div>
