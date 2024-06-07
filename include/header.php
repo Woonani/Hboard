@@ -25,10 +25,10 @@
 <link type="text/css" rel="stylesheet" href="http://q.hackershrd.com/worksheet/css/sub.css" /><!-- sub페이지에만 호출 -->
 <link type="text/css" rel="stylesheet" href="http://q.hackershrd.com/worksheet/css/login.css" /><!-- login페이지에만 호출 -->
 
-<script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/jquery-1.12.4.min.js"></script>
+<!-- <script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/plugins/bxslider/jquery.bxslider.min.js"></script>
 <script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/plugins/bxslider/bxslider.js"></script>
-<script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/ui.js"></script>
+<script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/ui.js"></script> -->
 <!--[if lte IE 9]> <script src="/js/common/place_holder.js"></script> <![endif]-->
 
 </head><body>

@@ -1,4 +1,4 @@
-<?php include "../../include/header.php" ?>
+<?php include "../include/header.php" ?>
 
 <div id="container">
 <?php
@@ -10,9 +10,9 @@ if($file && file_exists($file)) {
     // 아래코드는 무한 실행..
     // echo "<script>window.location.href = 'index.php';</script>";
     // exit; 
-    include_once "../../index.html";
+    include_once "../index.html";
 }                
 ?>
 </div>
 
-<?php include "../../include/footer.php" ?>
+<?php include "../include/footer.php" ?>

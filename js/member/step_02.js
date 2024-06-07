@@ -20,18 +20,27 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 sendNum = true;
                 console.log(phoneNum)
                 // AJAX로 서버에 핸드폰 번호 보냄
-                const mobileAuthNum = new FormData();
-                mobileAuthNum.append("mode", "send_num").append("phoneNum",phoneNum);
-
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", "../../controller/session.php");
-                
-                xhr.send(mobileAuthNum); // 요청 보냄
-
-                // xhr.onload = (data) =>{
-                //     console.log(data)
-                // }
-                alert("인증번호를 전송하였습니다.(123456)");
+                // 핸드폰 번호 받은거 확인하고 세션에 인증번호, 폰번호 저장
+                let params = new URLSearchParams({
+                    'mode' : 'phone_auth',
+                    'data' : phoneNum,
+                })
+                console.log(params.toString());
+                fetch('../../controller/step_02.php', {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    headers: {
+                        'content-Type' : 'application/x-www-form-urlencoded; charset=utf-8'
+                    },
+                    body: params
+                }).then((data)=>{
+                    if(data.ok){
+                        alert("인증번호를 전송하였습니다.(123456)");
+                    }else{
+                        alert("다시 진행해주세요");
+                        location.reload(true);
+                    }
+                }).catch(error => console.error('Error:', error));  
             }else{
                 sendNum = false;
                 alert("올바른 번호를 입력해 주세요");
@@ -52,21 +61,32 @@ document.addEventListener("DOMContentLoaded", ()=>{
             alert("인증번호를 입력해주세요!");
             return;
         }
-
-        // AJAX로 서버에 요청보냄
-        const mobileAuthNum = new FormData();
-        mobileAuthNum.append("authNum", "123456");
-
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "../../controller/session.php");
         
-        xhr.send(mobileAuthNum); // 요청 보냄
+        console.log("authNum.value ", authNum.value)
 
-        xhr.onload = (data) =>{
-            console.log(data)
-        }
+        // AJAX로 서버에 인증번호 일치 확인 요청보냄
+        fetch('../../controller/step_02.php', {
+            method: 'POST',
+            cache: 'no-cache',
+            headers: {
+                'content-Type' : 'application/x-www-form-urlencoded; charset=utf-8'
+            },
+            body: new URLSearchParams({
+                'mode' : 'auth_num_chk',
+                'data' : authNum.value,
+            })
+        }).then((data)=>{
+            if(data.ok){
+                alert("인증성공! 다음단계로 진행합니다.");
+                location.href = "../../member/index.php?mode=step_03";
+                // window.location.replace("http://lpass.hackers.com/member/index.php?mode=step_03");
 
-        // mobileForm.submit();
+            }else{
+                alert("다시 진행해주세요");
+            }
+        }).catch(error => console.error('Error:', error));  
+                    
+
     })   
 
 })
