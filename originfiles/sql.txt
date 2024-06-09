@@ -1,0 +1,33 @@
+use Hboard;
+show tables;
+CREATE TABLE Users (
+    id INT AUTO_INCREMENT PRIMARY KEY,             -- 유일한 ID를 위한 기본 키
+    username VARCHAR(50) NOT NULL,                 -- 사용자 이름
+    user_id VARCHAR(50) NOT NULL,                 -- 사용자 아이디
+    password VARCHAR(255) NOT NULL,                -- 비밀번호 (암호화된 형태로 저장)
+    email VARCHAR(100) NOT NULL,                   -- 이메일 주소
+    mobile_phone VARCHAR(15) NOT NULL,             -- 휴대폰 번호
+    home_phone VARCHAR(15),                        -- 일반 전화번호 (선택 사항)
+    postal_code VARCHAR(10),                       -- 우편번호
+    address VARCHAR(255),                          -- 기본 주소
+    address_detail VARCHAR(255),                   -- 상세 주소
+    sms_opt BOOLEAN DEFAULT TRUE,              -- SMS 수신 여부 (기본값: 수신 안 함)
+    email_opt BOOLEAN DEFAULT TRUE,            -- 메일 수신 여부 (기본값: 수신 안 함)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 생성 시간
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 수정 시간
+);
+-- select @@autocommit;
+
+select * from Users; 
+
+INSERT INTO Users (username, user_id, password, email, mobile_phone, home_phone
+, postal_code, address, address_detail, sms_opt, email_opt)
+VALUES ('관리자', 'admin', '1234', 'admin@example.com', '01012345678', '0212345678'
+, '06616', '서울 서초구 강남대로61길 23', '현대성우빌딩 1층', TRUE, TRUE);
+
+INSERT INTO Users (username, user_id, password, email, mobile_phone, home_phone
+, postal_code, address, address_detail, sms_opt, email_opt)
+VALUES ('학생', 'student', '1234', 'student1@example.com', '01098765432', NULL
+, '06608', '서울 서초구 서운로 197', '101동 101호', false, TRUE);
+
+
