@@ -1,5 +1,7 @@
+create user 'hackers'@'%' IDENTIFIED with mysql_native_password BY 'hackers1234!';
 use Hboard;
 show tables;
+drop table Users;
 CREATE TABLE Users (
     id INT AUTO_INCREMENT PRIMARY KEY,             -- 유일한 ID를 위한 기본 키
     username VARCHAR(50) NOT NULL,                 -- 사용자 이름
@@ -29,5 +31,4 @@ INSERT INTO Users (username, user_id, password, email, mobile_phone, home_phone
 , postal_code, address, address_detail, sms_opt, email_opt)
 VALUES ('학생', 'student', '1234', 'student1@example.com', '01098765432', NULL
 , '06608', '서울 서초구 서운로 197', '101동 101호', false, TRUE);
-
 
