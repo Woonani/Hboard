@@ -22,7 +22,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if($_POST['data'] == $_SESSION['phone_auth_num']){
             header('Content-Type: application/json');
-            echo json_encode(['status' => 'success', 'code' => '인증 성공']);
+            echo json_encode(['status' => 'success', 'message' => '인증 성공']);
         } else {
             header('Content-Type: application/json');
             echo json_encode(['status' => 'fail', 'message' => '인증번호 불일치']);
