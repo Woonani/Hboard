@@ -75,14 +75,18 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 'mode' : 'auth_num_chk',
                 'data' : authNum.value,
             })
+        }).then((res)=>{
+            return res.json();
         }).then((data)=>{
-            if(data.ok){
-                alert("인증성공! 다음단계로 진행합니다.");
-                location.href = "../../member/index.php?mode=step_03";
-                // window.location.replace("http://lpass.hackers.com/member/index.php?mode=step_03");
 
-            }else{
-                alert("다시 진행해주세요");
+            console.log("확인 : ",data)
+            console.log("확인 : ",data.status, " ", data.message)
+            if(data.status == 'success'){
+                alert(data.message+"다음단계로 진행합니다.");
+                location.href = "../../member/index.php?mode=step_03";
+                
+                }else if(data.status == 'fail'){
+                alert(data.message+"다시 진행해주세요");
             }
         }).catch(error => console.error('Error:', error));  
                     
