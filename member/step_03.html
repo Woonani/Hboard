@@ -1,3 +1,7 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="../js/member/step_03.js"></script>
+
 <div id="content" class="content">
 	<div class="inner">
 		<div class="tit-box-h3">
@@ -25,27 +29,30 @@
 				</colgroup>
 
 				<tbody>
-					<form action="">
+					<form name="signInForm" method="post" action="../controller/step_03.php">
+						<input type="hidden" name="mode" value="regist">
+						<input type="hidden" name="id_chk" value="0">
 						<tr>
 							<th scope="col"><span class="icons">*</span>이름</th>
-							<td><input name="u_name" type="text" class="input-text" style="width:302px"/></td>
+							<td><input name="name" id="name" type="text" class="input-text" style="width:302px"/></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>아이디</th>
-							<td><input name="u_id" type="text" class="input-text" style="width:302px" placeholder="영문자로 시작하는 4~15자의 영문소문자, 숫자"/><a href="#" class="btn-s-tin ml10">중복확인</a></td>
+							<td><input name="id" type="text" class="input-text" style="width:302px" placeholder="영문자로 시작하는 4~15자의 영문소문자, 숫자"/>
+								<a href="#" class="btn-s-tin ml10" id="dupChek">중복확인</a></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>비밀번호</th>
-							<td><input name="u_pw1" type="password" class="input-text" style="width:302px" placeholder="8-15자의 영문자/숫자 혼합"/></td>
+							<td><input name="pw1" type="password" class="input-text" style="width:302px" placeholder="8-15자의 영문자/숫자 혼합"/></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>비밀번호 확인</th>
-							<td><input name="u_pw2" type="password" class="input-text" style="width:302px"/></td>
+							<td><input name="pw2" type="password" class="input-text" style="width:302px"/></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>이메일주소</th>
 							<td>
-								<input  name="u_email1" type="text" class="input-text" style="width:138px"/> @ <input name="u_email2" type="text" class="input-text" style="width:138px"/>
+								<input  name="email1" type="text" class="input-text" style="width:138px"/> @ <input name="email2" type="text" class="input-text" style="width:138px"/>
 								<select class="input-sel" style="width:160px">
 									<option value="">선택입력</option>
 									<option value="">선택입력</option>
@@ -58,26 +65,27 @@
 						<tr>
 							<th scope="col"><span class="icons">*</span>휴대폰 번호</th>
 							<td>
-								<input name="u_phone1" type="text" class="input-text" style="width:50px"/> - 
-								<input name="u_phone2" type="text" class="input-text" style="width:50px"/> - 
-								<input name="u_phone3" type="text" class="input-text" style="width:50px"/>
+								<input name="phone1" type="text" class="input-text" style="width:50px" readonly/> - 
+								<input name="phone2" type="text" class="input-text" style="width:50px" readonly/> - 
+								<input name="phone3" type="text" class="input-text" style="width:50px" readonly/>
 							</td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons"></span>일반전화 번호</th>
-							<td><input name="u_tel" type="text" class="input-text" style="width:88px"/> - <input type="text" class="input-text" style="width:88px"/> - <input type="text" class="input-text" style="width:88px"/></td>
+							<td><input name="tel1" type="text" class="input-text" style="width:88px"/> - <input name="tel2" type="text" class="input-text" style="width:88px"/> - <input name="tel3" type="text" class="input-text" style="width:88px"/></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>주소</th>
 							<td>
 								<p >
-									<label>우편번호 <input  name="u_zipcode" type="text" class="input-text ml5" style="width:242px" disabled /></label><a href="#" class="btn-s-tin ml10">주소찾기</a>
+									<label>우편번호 <input  name="zipcode" type="text" class="input-text ml5" style="width:242px" disabled /></label>
+									<a href="#" class="btn-s-tin ml10" id="adrrBtn">주소찾기</a>
 								</p>
 								<p class="mt10">
-									<label>기본주소 <input  name="u_adrr1" type="text" class="input-text ml5" style="width:719px"/></label>
+									<label>기본주소 <input  name="adrr1" type="text" class="input-text ml5" style="width:719px"/></label>
 								</p>
 								<p class="mt10">
-									<label>상세주소 <input  name="u_adrr2" type="text" class="input-text ml5" style="width:719px"/></label>
+									<label>상세주소 <input  name="adrr2" type="text" class="input-text ml5" style="width:719px"/></label>
 								</p>
 							</td>
 						</tr>
@@ -86,11 +94,11 @@
 							<td>
 								<div class="box-input">
 									<label class="input-sp">
-										<input name="u_sms_t" type="radio" name="radio" id="u_sms" checked="checked"/>
+										<input name="sms_opt" type="radio" id="sms_t" checked="checked" value="1"/>
 										<span class="input-txt">수신함</span>
 									</label>
 									<label class="input-sp">
-										<input name="u_sms_f" type="radio" name="radio" id="u_sms" />
+										<input name="sms_opt" type="radio" id="sms_f" value="0"/>
 										<span class="input-txt">미수신</span>
 									</label>
 								</div>
@@ -102,11 +110,11 @@
 							<td>
 								<div class="box-input">
 									<label class="input-sp">
-										<input name="u_mail_t" type="radio" name="radio2" id="u_mail" checked="checked"/>
+										<input name="email_opt" type="radio" id="mail_t" checked="checked" value="1"/>
 										<span class="input-txt">수신함</span>
 									</label>
 									<label class="input-sp">
-										<input name="u_mail_f" type="radio" name="radio2" id="u_mail" />
+										<input name="email_opt" type="radio" id="mail_f" value="0"/>
 										<span class="input-txt">미수신</span>
 									</label>
 								</div>
@@ -118,7 +126,7 @@
 			</table>
 
 			<div class="box-btn">
-				<a href="" class="btn-l" id="signInBtn">회원가입</a>
+				<a href="#" class="btn-l" id="signInBtn">회원가입</a>
 			</div>
 		</div>
 	</div>

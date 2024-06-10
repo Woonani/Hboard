@@ -81,8 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return res.json();
     }).then((data)=>{
 
-        console.log("확인 : ",data)
-        console.log("확인 : ",data.status, " ", data.message)
+        // console.log("확인 : ",data)
+        // console.log("확인 : ",data.status, " ", data.message)
         if(data.status == 'success'){
             alert(data.message+"다음단계로 진행합니다.");
             location.href = "../../member/index.php?mode=step_03";

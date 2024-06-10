@@ -1,7 +1,4 @@
 <?php
-// 디버깅을 위한 로그 파일 설정
-ini_set('log_errors', 1);
-ini_set('error_log', '/data/logs/php-error.log');
 session_start();
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -9,10 +6,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($_POST['mode'] == 'phone_auth' && isset($_POST['data'])) { 
         $_SESSION['phone_auth_num'] = '123456';
         $_SESSION['user_phone_num'] = $_POST['data'];
-
-        // 데이터 확인 (디버깅용)
-        error_log("Mode: " . $mode);
-        error_log("Phone Number: " . $phoneNum);
 
         // echo "user_phone_num 값: ".$_SESSION['user_phone_num']; // 저장됨 확인
         header('Content-Type: application/json');
