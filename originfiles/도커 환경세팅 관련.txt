@@ -128,3 +128,22 @@ Query OK, 0 rows affected (0.01 sec)
 mysql> FLUSH PRIVILEGES;
 Query OK, 0 rows affected (0.00 sec)
 
+# mysql docker container files
+/etc/my.cnf 경로 
+# For advice on how to change settings please see
+# http://dev.mysql.com/doc/refman/8.2/en/server-configuration-defaults.html
+
+[mysqld]
+
+skip-host-cache
+skip-name-resolve
+datadir=/var/lib/mysql
+socket=/var/run/mysqld/mysqld.sock
+secure-file-priv=/var/lib/mysql-files
+user=mysql
+
+pid-file=/var/run/mysqld/mysqld.pid
+[client]
+socket=/var/run/mysqld/mysqld.sock
+
+!includedir /etc/mysql/conf.d/
