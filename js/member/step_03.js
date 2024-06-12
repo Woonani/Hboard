@@ -1,4 +1,4 @@
-console.log("js파일 불러옴")
+// console.log("js파일 불러옴")
 document.addEventListener("DOMContentLoaded", ()=>{
     const dupChek = document.querySelector("#dupChek")
     const adrrBtn = document.querySelector("#adrrBtn")
@@ -23,10 +23,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
             signInForm.phone3.value=phoneNum[2];
         }
     }).catch(error => console.error('Error:', error));  
+
           
     // 아이디 중복체크 버튼
     dupChek.addEventListener('click', ()=>{
-
         
         let params = new URLSearchParams({
             mode: "id_dup_chk",
@@ -74,60 +74,55 @@ document.addEventListener("DOMContentLoaded", ()=>{
         }).open();
     })
 
-/* */  
     // 입력값 유효성 체크
-    // signInBtn.addEventListener('submit', (event)=>{
-        signInForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        console.log("e : ",event);    
         
-        if (signInForm.name.value.trim()==""){
-            alert('필수입력사항입니다.')
-            signInForm.name.focus();
-            return;
-        }
-        if (signInForm.id.value.trim()==""){
-            alert('필수입력사항입니다.')
+
+    // 아이디 형식 확인
+    signInForm.id.addEventListener("blur",()=>{
+        const pattern = /^[a-z][a-z0-9]{3,14}$/;
+
+        if(signInForm.id.value.trim()!="" && !pattern.test(signInForm.id.value)) {
+            alert('유효하지 않은 형식입니다. id는 영문자로 시작하는 4~15자의 영문소문자, 숫자로 작성해주세요.')
+            signInForm.id.value = "";
             signInForm.id.focus();
-            return;
         }
-        if (signInForm.id_chk.value==0) {
-            alert("아이디 중복체크를 해주세요!");
-            return;
-        }
-        if (signInForm.pw1.value.trim()==""){
-            alert('필수입력사항입니다.')
+    })
+
+    // 비밀번호 형식 확인
+    signInForm.pw1.addEventListener("blur",()=>{
+        const pattern = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,15}$/;
+
+        if(signInForm.pw1.value.trim()!="" && !pattern.test(signInForm.pw1.value)) {
+            alert('유효하지 않은 형식입니다. 비밀번호는 영문자로 시작하는 4~15자의 영문소문자, 숫자로 작성해주세요.')
+            signInForm.pw1.value = "";
             signInForm.pw1.focus();
-            return;
         }
-        // if (signInForm.pw2.value.trim()==""){
-        //     alert('필수입력사항입니다.')
-        //     signInForm.pw2.focus();
-        //     return;
-        // }
-        // if (signInForm.email1.value.trim()==""){
-        //     alert('필수입력사항입니다.')
-        //     signInForm.email1.focus();
-        //     return;
-        // }
-        // if (signInForm.email2.value.trim()==""){
-        //     alert('필수입력사항입니다.')
-        //     signInForm.email2.focus();
-        //     return;
-        // }
+    })
+
+    // 비밀번호 일치 확인
+    signInForm.pw2.addEventListener("blur",()=>{
+        if(signInForm.pw2.value.trim()!="" && signInForm.pw1.value != signInForm.pw2.value) {
+            alert('비밀번호가 일치하지 않습니다. 다시 확인해주세요.')
+            signInForm.pw2.value = "";
+            signInForm.pw2.focus();
+        }
+    })
+
+
+
+    // signInBtn.addEventListener('submit', (event)=>{
+    signInForm.addEventListener('submit', function(event) {
+        event.preventDefault();
         
-        // if (signInForm.adrr1.value.trim()==""){
-        //     alert('필수입력사항입니다.')
-        //     signInForm.adrr1.focus();
-        //     return;
-        // }
-        // if (signInForm.adrr2.value.trim()==""){
-        //     alert('필수입력사항입니다.')
-        //     signInForm.adrr2.focus();
-        //     return;
-        // }
+        let ret = true;
+
+        ret = checkInput();
         
-        //변수 세팅해서 regist.php로 보내야겠다...
+        if(!ret){
+            return;
+        }       
+        
+        // input 세팅
         let data = new URLSearchParams({
             'name' : signInForm.name.value,
             'id' : signInForm.id.value,
@@ -142,32 +137,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
             'email_opt' : signInForm.email_opt.value,
         });
 
-        /*
-        let data2 = {
-            'name' : signInForm.name.value,
-            'id' : signInForm.id.value,
-            'pw' : signInForm.pw1.value,
-            'email' : signInForm.email1.value,
-            'phone' : signInForm.phone1.value+signInForm.phone2.value+signInForm.phone3.value,
-            'tel' : signInForm.tel1.value+signInForm.tel2.value+signInForm.tel3.value,
-            'postal_code' : signInForm.zipcode.value,
-            'address' : signInForm.adrr1.value,
-            'address_detail' : signInForm.adrr2.value,
-            'sms_opt' : signInForm.sms_opt.value,
-            'email_opt' : signInForm.email_opt.value,
-        };
 
-        console.log("data", data2)
-        */
-
-    // })
       
-    // 2. 폼전송
-    
-    // signInBtn.addEventListener('submit', (e)=>{
-
-        // window.location.href = '../member/index.php?mode=regist';
-        
+    // 2. 폼전송        
         fetch('../controller/regist.php', {
             method: 'POST',
             cache: 'no-cache',
@@ -193,13 +165,60 @@ document.addEventListener("DOMContentLoaded", ()=>{
             console.error('Error:', error);
             if (error.message.includes('Unexpected token')) {
                 console.error('Received HTML response instead of JSON');
-                // HTML 응답을 처리하는 방법을 추가
             }
         });
 
     })
-  
-    
 })
 
+// input 값 체크
+function checkInput () {
+    if (signInForm.name.value.trim()==""){
+        alert('이름는 필수입력사항입니다.')
+        signInForm.name.focus();
+        return false;
+    }
+    if (signInForm.id.value.trim()==""){
+        alert('아이디는 필수입력사항입니다.')
+        signInForm.id.focus();
+        return false;
+    }
+    if (signInForm.id_chk.value==0) {
+        alert("아이디 중복체크를 해주세요!");
+        return false;
+    }
+    if (signInForm.pw1.value.trim()==""){
+        alert('비밀번호는 필수입력사항입니다.')
+        signInForm.pw1.focus();
+        return false;
+    }
+    if (signInForm.pw2.value.trim()==""){
+        alert('비밀번호 확인을 입력해주세요.')
+        signInForm.pw2.focus();
+        return false;
+    }
 
+    if (signInForm.email1.value.trim()==""){
+        alert('이메일 주소는 필수입력사항입니다.')
+        signInForm.email1.focus();
+        return false;
+    }
+    if (signInForm.email2.value.trim()==""){
+        alert('이메일 주소는 필수입력사항입니다.')
+        signInForm.email2.focus();
+        return false;
+    }
+    
+    if (signInForm.adrr1.value.trim()==""){
+        alert('주소는 필수입력사항입니다.')
+        signInForm.adrr1.focus();
+        return false;
+    }
+    if (signInForm.adrr2.value.trim()==""){
+        alert('상세주소를 입력해주세요.')
+        signInForm.adrr2.focus();
+        return false;
+    }
+
+    return true;
+}

@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <!--[if (IE 7)]><html class="no-js ie7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"><![endif]-->
@@ -43,7 +45,7 @@
 		
 		<div class="nav-section">
 			<div class="inner p-r">
-				<h1><a href="/"><img src="http://img.hackershrd.com/common/logo.png" alt="해커스 HRD LOGO" width="165" height="37"/></a></h1>
+				<h1><a href="/"><img src="https://cdn.hackershrd.com/img_hrd/main/re_210929/logo_black.png" alt="해커스 HRD LOGO" width="165" height="37"/></a></h1>
 				<div class="nav-box">
 					<h2 class="hidden">주메뉴 시작</h2>
 					
@@ -145,17 +147,25 @@
 		<div class="top-section">
 			<div class="inner">
 				<div class="link-box">
-					<!-- 로그인전 -->
-					<a href="#">로그인</a>
-					<a href="http://test.hackers.com/member/index.php?mode=step_01"
-					>회원가입</a
-					>
-					<!-- <a href="./member/index.php?mode=step_01">회원가입2</a> -->
+					<?php					
+						// 로그인 전
+						if(!isset($_SESSION['login_user_id'])) {		
+
+					?>					
+					<!-- <a href="http://test.hackers.com/controller/login.php">로그인</a> -->
+					<a href="http://test.hackers.com/member/index.php">로그인</a>
+					<a href="http://test.hackers.com/member/index.php?mode=step_01">회원가입</a>
 					<a href="#">상담/고객센터</a>
-					<!-- 로그인후 -->
-					<!-- <a href="#">로그아웃</a>
-					<a href="#">내정보</a>
-					<a href="#">상담/고객센터</a> -->
+					<?php		
+						} else {
+						// 로그인 후
+					?>				
+					<a href="http://test.hackers.com/controller/auth.php?mode=logout">로그아웃</a>
+					<a href="http://test.hackers.com/member/index.php?mode=modify">내정보</a>
+					<a href="#">상담/고객센터</a>
+					<?php 
+					}
+					?>
 				</div>
 			</div>
 		</div>

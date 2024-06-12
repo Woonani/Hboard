@@ -54,7 +54,7 @@ function signIn($data) {
 
   $name = $data['name'];
   $id = $data['id'];
-  $pw = $data['pw'];
+  $pw = hash("sha256", $data['pw']);
   $email = $data['email'];
   $phone = $data['phone'];
   $tel = $data['tel'];

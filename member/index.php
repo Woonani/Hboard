@@ -1,32 +1,54 @@
-<?php include "../include/header.php" ?>
+<?php 
+session_start();
 
-<div id="container">
-<?php
+// 로그인 유저 메뉴
+if(isset($_SESSION['login_user_id'])){ //} &&  $_SESSION['islogin'] == 'loginned'){
+    include "../include/header.php";
+?>        
+    <div id="container">    
+<?php      
 
-if (isset($_GET['mode'])) {
-    if ($_GET['mode'] === 'regist') {
-        // 회원가입 폼 표시
-        include 'regist.php';
-    } else{
+    if (isset($_GET['mode'])){
+    
         $file = isset($_GET['mode']) ? $_GET['mode'].".html" : '';
-        include $file;
+
+        if($file && file_exists($file)) {
+ 
+            include $file;
+
+            
+        }           
+    
+    } else {
+        include_once "../index2.html";
     }
+?>    
+    </div>    
+<?php       include "../include/footer.php"; 
+    
 } else {
-    echo "잘못된 접근입니다.";
+// 비로그인 유저 메뉴
+
+    if (isset($_GET['mode'])){
+        $file = isset($_GET['mode']) ? $_GET['mode'].".html" : '';
+
+        include "../include/header.php";
+            ?>        
+                <div id="container">    
+            <?php 
+        if($file && file_exists($file)) {                 
+            include $file;                
+        }           
+        
+        
+
+        ?>    
+        </div>    
+    <?php       include "../include/footer.php"; 
+
+} else {
+    // include_once "../index2.html";
+    include "./login.html";
 }
-
-
-// $file = isset($_GET['mode']) ? $_GET['mode'].".html" : '';
-
-// if($file && file_exists($file)) {
-//     include $file;
-// } else {
-//     // 아래코드는 무한 실행..
-//     // echo "<script>window.location.href = 'index.php';</script>";
-//     // exit; 
-//     include_once "../index.html";
-// }                
-// ?>
-</div>
-
-<?php include "../include/footer.php" ?>
+}
+?>

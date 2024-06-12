@@ -1,4 +1,4 @@
-console.log("js파일 불러옴");
+// console.log("js파일 불러옴");
 document.addEventListener("DOMContentLoaded", () => {
   const mobileAuthNum = document.querySelector("#mobileAuthNum");
   const num1 = document.querySelector("#mo_input_01");
