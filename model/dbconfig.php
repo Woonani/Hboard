@@ -1,5 +1,5 @@
 <?php
-$dbhost = "172.16.1.66";  // 내 pc IP
+$dbhost = "192.168.123.108";  // 내 pc IP  192.168.123.108
 // $hostname = "127.0.0.1";  // MySQL 호스트 이름
 $dbusername = "hackers";      // MySQL 사용자 이름
 $dbpassword = "hackers1234!"; // MySQL 비밀번호
