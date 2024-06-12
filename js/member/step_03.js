@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
             mode: "id_dup_chk",
             data: signInForm.id.value,
           });
-        console.log("유저아이디 : ", params)
 
         fetch('../../controller/step_03.php', {
             method: 'POST',
@@ -73,8 +72,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
             }
         }).open();
     })
-
-    // 입력값 유효성 체크
         
 
     // 아이디 형식 확인
@@ -128,8 +125,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
             'id' : signInForm.id.value,
             'pw' : signInForm.pw1.value,
             'email' : signInForm.email1.value,
-            'phone' : signInForm.phone1.value+signInForm.phone2.value+signInForm.phone3.value,
-            'tel' : signInForm.tel1.value+signInForm.tel2.value+signInForm.tel3.value,
+            'phone' : signInForm.phone1.value+"-"+signInForm.phone2.value+"-"+signInForm.phone3.value,
+            'tel' : signInForm.tel1.value+"-"+signInForm.tel2.value+"-"+signInForm.tel3.value,
             'postal_code' : signInForm.zipcode.value,
             'address' : signInForm.adrr1.value,
             'address_detail' : signInForm.adrr2.value,

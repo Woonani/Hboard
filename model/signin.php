@@ -35,10 +35,7 @@ function checkId($id) {
           $result['message'] = "사용 가능한 id 입니다.";
         }
   
-        // mysqli_close($connect); // db 연결 종료
-        // prepared statement 종료
         mysqli_stmt_close($stmt);
-        // MySQL 연결 종료
         mysqli_close($conn); 
         
     }

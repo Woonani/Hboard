@@ -1,5 +1,4 @@
 <?php
-// phpinfo();
 $dbhost = "172.16.1.66";  // 내 pc IP
 // $hostname = "127.0.0.1";  // MySQL 호스트 이름
 $dbusername = "hackers";      // MySQL 사용자 이름

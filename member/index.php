@@ -12,11 +12,8 @@ if(isset($_SESSION['login_user_id'])){ //} &&  $_SESSION['islogin'] == 'loginned
     
         $file = isset($_GET['mode']) ? $_GET['mode'].".html" : '';
 
-        if($file && file_exists($file)) {
- 
-            include $file;
-
-            
+        if($file && file_exists($file)) { 
+            include $file;            
         }           
     
     } else {
@@ -38,16 +35,13 @@ if(isset($_SESSION['login_user_id'])){ //} &&  $_SESSION['islogin'] == 'loginned
             <?php 
         if($file && file_exists($file)) {                 
             include $file;                
-        }           
-        
-        
+        }                        
 
         ?>    
         </div>    
     <?php       include "../include/footer.php"; 
 
 } else {
-    // include_once "../index2.html";
     include "./login.html";
 }
 }
