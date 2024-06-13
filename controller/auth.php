@@ -1,8 +1,9 @@
 <?php
 
 session_start();
+
+include '../model/dbconfig.php';
 include '../model/login.php';
-// print_r($_POST);
 
 if(isset($_POST['mode']) && $_POST['mode'] == 'login') {
 
@@ -10,10 +11,12 @@ if(isset($_POST['mode']) && $_POST['mode'] == 'login') {
         $result = login($_POST);
         
         if($result['status'] && $result['login']=="success"){
-            $_SESSION['login_user_id'] = $result['id'];
+
+            $_SESSION['login_user_seq'] = $result['data']['id'];
+            $_SESSION['login_user_id'] = $result['data']['user_id'];
+            $_SESSION['login_user_name'] = $result['data']['username'];
             $_SESSION['islogin'] = 'loginned';
             $redirect_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
-
             header("Location: $redirect_url");
             exit();
             

@@ -1,6 +1,6 @@
 <?php
 
-function getUserInfo( $loginId) {
+function getUserInfo( $seq) {
     global $conn;
     
     $result = array();
@@ -10,8 +10,8 @@ function getUserInfo( $loginId) {
         $result['message'] = mysqli_connect_errno();
     } else {
 
-        $stmt = mysqli_prepare($conn,"select * from Users where user_id = ?");
-        mysqli_stmt_bind_param($stmt,"s",$loginId);
+        $stmt = mysqli_prepare($conn,"select * from Users where id = ?");
+        mysqli_stmt_bind_param($stmt,"s",$seq);
         mysqli_stmt_execute($stmt);
         $queryResult = mysqli_stmt_get_result($stmt);
         $result['data'] = mysqli_fetch_assoc($queryResult);
@@ -32,24 +32,51 @@ function getUserInfo( $loginId) {
 }
 
 // 파일에 오류가 있으면 아예 전체 파일이 include가 안됨
-// function setUserInfo(){
-//     $result = array();
-//     include __DIR__ .'/model/dbconfig.php';
+function setUserInfo($seq, $data){
+    global $conn;
 
-//     if(mysqli_connect_errno()){
-//         $result['status'] = false;
-//         $result['message'] = mysqli_connect_errno();
-//     } else {
-        // $stmt = mysqli_prepare($conn,"");
-        // mysqli_stmt_bind_param($stmt,"",);
-        // mysqli_stmt_execute($stmt);
-        // $queryResult = mysqli_stmt_get_result($stmt);
+    $result = array();
+        
+    // $name = $data['name'];
+    $id = $seq;
+    $user_id = $data['id'];
+    $password = hash("sha256", $data['pw']);
+    $email = $data['email'];
+    // $phone = $data['phone'];
+    $home_phone = $data['tel'];
+    $postal_code = $data['postal_code'];
+    $address = $data['address'];
+    $address_detail = $data['address_detail'];
+    $sms_opt = $data['sms_opt'];
+    $email_opt = $data['email_opt'];
 
-        // // 로직
+    if(mysqli_connect_errno()){
+        $result['status'] = false;
+        $result['message'] = mysqli_connect_errno();
+    } else {
+        $sql = "UPDATE Users
+                SET user_id = ?, password = ?, email = ?, home_phone = ?, postal_code = ?, 
+                    address = ?, address_detail = ?, sms_opt = ?, email_opt = ?
+                WHERE id = ?";
 
-        // mysqli_stmt_close($stmt);
-        // mysqli_close($conn);
-//     }
-// }
+
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "sssssssiii", $user_id, $password, $email, $home_phone, $postal_code, $address, $address_detail, $sms_opt, $email_opt, $id);
+
+        $queryResult = mysqli_stmt_execute($stmt);
+
+        $result['status'] = true;
+
+        if($queryResult){ 
+            $result['message'] = "수정 완료";
+        }else{ 
+            $result['message'] = "수정 실패";
+        }
+
+        mysqli_stmt_close($stmt);
+        mysqli_close($conn); 
+    }
+    return $result;
+}
 
 

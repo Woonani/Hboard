@@ -23,7 +23,7 @@
 				<dd>
 					고객님이 회원 가입 시 등록한 휴대폰 번호와 입력하신 휴대폰 번호가 동일해야 합니다.
 					<label class="input-sp big">
-						<input type="radio" name="radio" checked="checked"/>
+						<input type="radio" name="radio" checked="checked" id="byPhone"/>
 						<span class="input-txt"></span>
 					</label>
 				</dd>
@@ -34,7 +34,7 @@
 				<dd>
 					고객님이 회원 가입 시 등록한 이메일 주소와 입력하신 이메일 주소가 동일해야 합니다.
 					<label class="input-sp big">
-						<input type="radio" name="radio"/>
+						<input type="radio" name="radio" id="byEmail"/>
 						<span class="input-txt"></span>
 					</label>
 				</dd>
@@ -51,7 +51,7 @@
 					<tbody>
 						<tr>
 							<th scope="col">성명</th>
-							<td><input type="text" class="input-text" style="width:302px" /></td>
+							<td><input id="username" type="text" class="input-text" style="width:302px" /></td>
 						</tr>
 						<tr>
 							<th scope="col">생년월일</th>
@@ -87,8 +87,8 @@
 							<td>
 								<input type="text" class="input-text" style="width:138px"/> @ <input type="text" class="input-text" style="width:138px"/>
 								<select class="input-sel" style="width:160px">
-									<option value="">선택입력</option>
-									<option value="">선택입력</option>
+									<option value="example.com">example.com</option>
+									<option value="naver.com">naver.com</option>
 									<option value="">선택입력</option>
 									<option value="">선택입력</option>
 									<option value="">선택입력</option>
