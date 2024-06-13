@@ -1,5 +1,5 @@
 <?php 
-session_start();
+// session_start();
 
 // 로그인 유저 메뉴
 if(isset($_SESSION['login_user_id'])){ //} &&  $_SESSION['islogin'] == 'loginned'){

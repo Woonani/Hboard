@@ -1,4 +1,7 @@
 .htaccess
+db_check.php
+dbconfig.php
+
 # dbconfig.php
 
 # .gitignore 파일 예제 --------------------------------------------------------------

@@ -1,6 +1,6 @@
 <?php
 // phpinfo();
-$hostname = "172.16.1.66";  // 내 pc IP
+$hostname = "192.168.123.108";  // 내 pc IP
 // $hostname = "127.0.0.1";  // MySQL 호스트 이름
 $username = "hackers";      // MySQL 사용자 이름
 $password = "hackers1234!"; // MySQL 비밀번호
