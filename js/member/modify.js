@@ -52,10 +52,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }   
 
         // input 세팅
+        let emailAddr = modifyForm.email1.value.trim() + "@" + modifyForm.email2.value.trim();
+        
         let data = new URLSearchParams({
             'id' : modifyForm.id.value,
             'pw' : modifyForm.pw1.value,
-            'email' : modifyForm.email1.value,
+            'email' : emailAddr,
             'tel' : modifyForm.tel1.value == "" ? "" : modifyForm.tel1.value+"-"+ modifyForm.tel2.value+"-"+ modifyForm.tel3.value,
             'postal_code' : modifyForm.zipcode.value,
             'address' : modifyForm.addr1.value,
@@ -147,7 +149,7 @@ dupChekBtn.addEventListener('click', ()=>{
     })
 
       // 아이디 형식 확인
-      modifyForm.id.addEventListener("blur",()=>{
+    modifyForm.id.addEventListener("blur",()=>{
         const pattern = /^[a-z][a-z0-9]{3,14}$/;
 
         if(modifyForm.id.value.trim()!="" && !pattern.test(modifyForm.id.value)) {
@@ -174,6 +176,18 @@ dupChekBtn.addEventListener('click', ()=>{
             alert('비밀번호가 일치하지 않습니다. 다시 확인해주세요.')
             modifyForm.pw2.value = "";
             modifyForm.pw2.focus();
+        }
+    })
+
+    // 이메일 select onChange 이벤트
+    modifyForm.emailSelect.addEventListener('change', ()=>{
+        console.log("선택함")
+        if(modifyForm.emailSelect.value==""){
+            modifyForm.email2.readOnly=false;
+            modifyForm.email2.value="";
+        }else{
+            modifyForm.email2.readOnly=true;
+            modifyForm.email2.value=modifyForm.emailSelect.value;
         }
     })
 

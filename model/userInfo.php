@@ -78,5 +78,3 @@ function setUserInfo($seq, $data){
     }
     return $result;
 }
-
-
