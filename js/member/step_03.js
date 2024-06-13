@@ -105,6 +105,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
         }
     })
 
+    // 이메일 형식 확인
+    let emailAddr = signInForm.email1.value.trim() + "@" + signInForm.email2.value.trim();
+    const regEmail = /^[a-zA-Z0-9]+@[a-zA-Z]+\.(com|net|org|ac\.kr)$/;
+
+    if (!regEmail.test(emailAddr)) {
+        alert("형식에 맞지 않는 이메일 입니다.");
+        return false;
+    }
+
 
 
     // signInBtn.addEventListener('submit', (event)=>{
@@ -120,11 +129,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
         }       
         
         // input 세팅
+        let emailAddr = signInForm.email1.value.trim() + "@" + signInForm.email2.value.trim();
+
         let data = new URLSearchParams({
             'name' : signInForm.name.value,
             'id' : signInForm.id.value,
             'pw' : signInForm.pw1.value,
-            'email' : signInForm.email1.value,
+            'email' : emailAddr,
             'phone' : signInForm.phone1.value+"-"+signInForm.phone2.value+"-"+signInForm.phone3.value,
             'tel' : signInForm.tel1.value+"-"+signInForm.tel2.value+"-"+signInForm.tel3.value,
             'postal_code' : signInForm.zipcode.value,
@@ -136,7 +147,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
       
-    // 2. 폼전송        
+        // 2. 폼전송        
         fetch('../controller/regist.php', {
             method: 'POST',
             cache: 'no-cache',
@@ -165,6 +176,18 @@ document.addEventListener("DOMContentLoaded", ()=>{
             }
         });
 
+    })
+
+    // 이메일 select onChange 이벤트
+    signInForm.emailSelect.addEventListener('change', ()=>{
+        console.log("선택함")
+        if(signInForm.emailSelect.value==""){
+            signInForm.email2.readOnly=false;
+            signInForm.email2.value="";
+        }else{
+            signInForm.email2.readOnly=true;
+            signInForm.email2.value=signInForm.emailSelect.value;
+        }
     })
 })
 

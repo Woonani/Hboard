@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const modifyFormBtn = document.querySelector('#modifyFormBtn');
+    const dupChekBtn = document.querySelector('#dupChek');
+    const addrBtn = document.querySelector("#addrBtn")
+
 
     // 로그인 유저 정보 불러오기 바로 실행
     fetch("../../controller/modify.php?mode=enter")
@@ -10,16 +13,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const formData = data.data;
 
             document.modifyForm.id.value = formData.user_id;
-            // document.modifyForm.pw1.value = formData.password; // 보통 비밀번호는 비워져있음
-            // document.modifyForm.pw2.value = formData.password;
             let emailAddr = formData.email.split("@");
             document.modifyForm.email1.value = emailAddr[0];
             document.modifyForm.email2.value = emailAddr[1];
-
-            let phoneNum = formData.home_phone.split("-");
-            document.modifyForm.tel1.value = phoneNum[0];
-            document.modifyForm.tel2.value = phoneNum[1];
-            document.modifyForm.tel3.value = phoneNum[2];
+            
+            if(formData.home_phone != null && formData.home_phone.length > 0){
+                let tel = formData.home_phone.split("-");
+                document.modifyForm.tel1.value = tel[0];
+                document.modifyForm.tel2.value = tel[1];
+                document.modifyForm.tel3.value = tel[2];
+            }            
 
             document.modifyForm.zipcode.value = formData.postal_code;
             document.modifyForm.addr1.value = formData.address;
@@ -36,8 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // 아이디 수정할 경우 중복체크 버튼 하도록
         modifyForm.id_chk.value="0";
     })
-///////////////////// modifyFormBtn
-    modifyForm.modifyFormBtn.addEventListener('submit',(e)=>{
+
+    modifyForm.addEventListener('submit',(e)=>{
         e.preventDefault();
 
         let ret = true;
@@ -49,22 +52,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }   
 
         // input 세팅
+        let emailAddr = modifyForm.email1.value.trim() + "@" + modifyForm.email2.value.trim();
+        
         let data = new URLSearchParams({
-            // 'name' : modifyForm.name.value,
             'id' : modifyForm.id.value,
             'pw' : modifyForm.pw1.value,
-            'email' : modifyForm.email1.value,
-            'phone' : modifyForm.phone1.value+"-"+modifyForm.phone2.value+"-"+modifyForm.phone3.value,
-            'tel' : modifyForm.tel1.value+"-"+modifyForm.tel2.value+"-"+modifyForm.tel3.value,
+            'email' : emailAddr,
+            'tel' : modifyForm.tel1.value == "" ? "" : modifyForm.tel1.value+"-"+ modifyForm.tel2.value+"-"+ modifyForm.tel3.value,
             'postal_code' : modifyForm.zipcode.value,
-            'address' : modifyForm.adrr1.value,
-            'address_detail' : modifyForm.adrr2.value,
+            'address' : modifyForm.addr1.value,
+            'address_detail' : modifyForm.addr2.value,
             'sms_opt' : modifyForm.sms_opt.value,
             'email_opt' : modifyForm.email_opt.value,
         });
 
-        // 폼전송        
-        fetch('../controller/regist.php', {
+        console.log(data)
+        // 폼전송     
+        
+        fetch('../controller/modify.php', {
             method: 'POST',
             cache: 'no-cache',
             headers: {
@@ -79,10 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
     
             if(data.status == 'success'){
                 alert(data.message);
-                location.href = "../../member/index.php?mode=complete";
+                location.href = "../../member/index.php?mode=modify";
                 
             }else if(data.status == 'fail') {
-                alert(data.message+"다시 진행해주세요");
+                alert(data.message+" 다시 진행해주세요");
             }
 
         }).catch(error => {
@@ -92,11 +97,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-
+        
     })
 
 // 아이디 중복체크 버튼
-dupChek.addEventListener('click', ()=>{
+dupChekBtn.addEventListener('click', ()=>{
         
     let params = new URLSearchParams({
         mode: "id_dup_chk",
@@ -129,22 +134,22 @@ dupChek.addEventListener('click', ()=>{
 } )
 
     // 우편번호 찾기 다음 API
-    adrrBtn.addEventListener('click',()=>{
+    addrBtn.addEventListener('click',()=>{
         new daum.Postcode({
             oncomplete: function(data) {
                 console.log("data ",data)
                 modifyForm.zipcode.value = data.zonecode;
                 if(data.userSelectedType == 'R') {
-                    modifyForm.adrr1.value = data.roadAddress;
+                    modifyForm.addr1.value = data.roadAddress;
                 } else {
-                    modifyForm.adrr1.value = data.jibunAddress;                    
+                    modifyForm.addr1.value = data.jibunAddress;                    
                 }
             }
         }).open();
     })
 
       // 아이디 형식 확인
-      modifyForm.id.addEventListener("blur",()=>{
+    modifyForm.id.addEventListener("blur",()=>{
         const pattern = /^[a-z][a-z0-9]{3,14}$/;
 
         if(modifyForm.id.value.trim()!="" && !pattern.test(modifyForm.id.value)) {
@@ -171,6 +176,18 @@ dupChek.addEventListener('click', ()=>{
             alert('비밀번호가 일치하지 않습니다. 다시 확인해주세요.')
             modifyForm.pw2.value = "";
             modifyForm.pw2.focus();
+        }
+    })
+
+    // 이메일 select onChange 이벤트
+    modifyForm.emailSelect.addEventListener('change', ()=>{
+        console.log("선택함")
+        if(modifyForm.emailSelect.value==""){
+            modifyForm.email2.readOnly=false;
+            modifyForm.email2.value="";
+        }else{
+            modifyForm.email2.readOnly=true;
+            modifyForm.email2.value=modifyForm.emailSelect.value;
         }
     })
 
@@ -210,14 +227,14 @@ function checkInput () {
         return false;
     }
     
-    if (modifyForm.adrr1.value.trim()==""){
+    if (modifyForm.addr1.value.trim()==""){
         alert('주소는 필수입력사항입니다.')
-        modifyForm.adrr1.focus();
+        modifyForm.addr1.focus();
         return false;
     }
-    if (modifyForm.adrr2.value.trim()==""){
+    if (modifyForm.addr2.value.trim()==""){
         alert('상세주소를 입력해주세요.')
-        modifyForm.adrr2.focus();
+        modifyForm.addr2.focus();
         return false;
     }
 

@@ -1,9 +1,9 @@
 <?php
 
 function checkId($id) {
-
+  global $conn;
     $result = array();
-    include __DIR__ .'/dbconfig.php'; // /경로문제!!!
+    // include __DIR__ .'/dbconfig.php'; // /경로문제!!!
 
 
     if(mysqli_connect_errno()){ //db연결 실패
@@ -46,6 +46,7 @@ function checkId($id) {
 
 
 function signIn($data) {
+  global $conn;
 
   $result = array();
 
@@ -61,7 +62,7 @@ function signIn($data) {
   $sms_opt = $data['sms_opt'];
   $email_opt = $data['email_opt'];
 
-  include __DIR__ .'/dbconfig.php';
+  // include __DIR__ .'/dbconfig.php';
 
 
   if(mysqli_connect_errno()){ 

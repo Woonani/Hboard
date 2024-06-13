@@ -1,11 +1,11 @@
 <?php
 
 include '../model/dbconfig.php'; 
+include '../model/signin.php'; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = $_POST;
 
-    include '../model/signin.php'; 
 
     $result = signIn( $data);
 

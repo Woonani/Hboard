@@ -14,6 +14,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if ($_POST['mode'] == 'auth_num_chk' && isset($_POST['data'])) { 
         
         if($_POST['data'] == $_SESSION['phone_auth_num']){
+            unset($_SESSION['phone_auth_num']);
             header('Content-Type: application/json');
             echo json_encode(['status' => 'success', 'message' => '인증 성공']);
         } else {

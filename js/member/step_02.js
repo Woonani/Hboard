@@ -26,7 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
           mode: "phone_auth",
           data: phoneNum,
         });
-        console.log(params.toString());
+        // console.log(params.toString());
+
         fetch("../../controller/step_02.php", {
           method: "POST",
           cache: "no-cache",
