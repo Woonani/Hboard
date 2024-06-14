@@ -1,3 +1,26 @@
+# 컬럼 명
+강의 테이블
+lec_seq
+lec_name
+instructor
+level
+time
+chapter
+image_url
+tag_no
+created_at
+updated_at
+
+리뷰테이블
+rev_seq
+rev_title
+contents
+rating
+lec_seq
+author
+created_at
+updated_at
+
 create user 'hackers'@'%' IDENTIFIED with mysql_native_password BY 'hackers1234!';
 use Hboard;
 show tables;
@@ -32,3 +55,55 @@ INSERT INTO Users (username, user_id, password, email, mobile_phone, home_phone
 , postal_code, address, address_detail, sms_opt, email_opt)
 VALUES ('학생', 'student', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'student1@example.com', '010-9876-5432', NULL
 , '06608', '서울 서초구 서운로 197', '101동 101호', false, TRUE);
+
+---------------------------------------------
+-- Lecture Table
+-- drop table Lectures;
+CREATE TABLE Lectures (
+    lec_seq INT AUTO_INCREMENT PRIMARY KEY,				-- 강의seq
+    lec_name VARCHAR(255) NOT NULL,					-- 강의명
+    instructor VARCHAR(255) NOT NULL,				-- 강사명
+    level VARCHAR(10) NOT NULL,						-- 학습난이도
+    time INT NOT NULL,								-- 교육시간
+    chapter INT NOT NULL,							-- 강의 수
+    image_url VARCHAR(255) NOT NULL,				-- 강의이미지url
+    tag_no VARCHAR(10) NOT NULL,					-- 분류코드 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 생성 시간
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 	-- 수정 시간
+);
+
+-- Example insert statements
+-- 예시 데이터 삽입
+INSERT INTO Lectures (lec_name, instructor, level, time, chapter, image_url, tag_no)
+VALUES ('데이터 구조', '이순신', '중', 20, 20, 'http://example.com/image1.jpg', '1');
+
+INSERT INTO Lectures (lec_name, instructor, level, time, chapter, image_url, tag_no)
+VALUES ('머신 러닝', '강감찬', '상', 60, 30, 'http://example.com/image2.jpg', '2');
+
+
+
+------------------------------------------------------------------------------------
+
+
+
+-- Review Table
+CREATE TABLE Reviews (
+    rev_seq INT AUTO_INCREMENT PRIMARY KEY,			-- 리뷰seq
+    rev_title VARCHAR(255) NOT NULL,				-- 후기제목
+    contents TEXT NOT NULL,							-- 내용
+    rating VARCHAR(10) NOT NULL,							-- 강의만족도
+    lec_seq INT NOT NULL,							-- (왜래키) 강의seq
+    author INT NOT NULL,							-- (왜래키) 작성자seq
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 생성 시간
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 수정 시간
+    FOREIGN KEY (author) REFERENCES Users(id),		
+    FOREIGN KEY (lec_seq) REFERENCES Lectures(lec_seq)
+);
+
+-- 예시 데이터 삽입
+INSERT INTO Reviews (rev_title, contents, rating, lec_seq, author)
+VALUES ('훌륭한 강의!', '이 강의는 매우 유익하고 잘 구성되었습니다.', '5', 1, 2);
+
+INSERT INTO Reviews (rev_title, contents, rating, lec_seq, author)
+VALUES ('도전적이지만 보람있음', '이 강의는 꽤 도전적이었지만 많은 것을 배웠습니다.', '4', 2, 3);
+
