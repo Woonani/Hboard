@@ -24,6 +24,7 @@ if(isset($_POST['mode']) && $_POST['mode'] == 'login') {
 
                 $redirect_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
                 header("Location: $redirect_url");
+                // referer를 쓰는 이유 : 메뉴클릭 => 인덱스에서 로그인페이지 띄움 => 로그인 하면 처음 클릭했던 메뉴가 referer로 동작
             }
             exit();
             

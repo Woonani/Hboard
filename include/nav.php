@@ -8,8 +8,13 @@
 						<li class="mnu">
 							<a href="#">일반직무</a>
 							<ul class="nav-sub-lst">
-								<!-- <li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li> -->
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
 							</ul>
 						</li>
 						<li class="mnu2">
@@ -40,17 +45,33 @@
 								<li><a href="#">사업주훈련</a></li>
 								<li><a href="#">국민내일배움카드안내</a></li>
 								<li><a href="#">학습안내</a></li> -->
-								<li><a href="#">수강후기</a></li>
+								<li><a href="http://test.hackers.com/lecture_board/index.php?mode=list">수강후기</a></li>
 								<!-- <li><a href="#">역량강화 자료모음</a></li>
 								<li><a href="#">실무활용무료자료</a></li> -->
 							</ul>
 						</li>
 						<li class="mnu6">
-							<a href="#">내 강의실</a>
+                            <?php					
+                                // 관리자 메뉴
+                                if($_SESSION['login_user_id']=='admin') {	
+                            ?>
+							<a href="#">관리자 메뉴</a>
 							<ul class="nav-sub-lst">
-								<!-- <li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li> -->
+								<li><a href="http://test.hackers.com/admi/index.php">강의 관리</a></li>
 							</ul>
+                            <?php		
+                                } else {
+                                // 일반 사용자 메뉴
+                                
+                            ?>	
+                            <a href="#">내 강의실</a>
+							<ul class="nav-sub-lst">
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+							</ul>
+                            <?php 
+                            }
+                            ?>
 						</li>
 					</ul>
 				</div>

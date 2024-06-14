@@ -21,7 +21,8 @@ if(isset($_SESSION['login_user_id'])){ //} &&  $_SESSION['islogin'] == 'loginned
     } else {
         include_once "../index.php"; 
     }
-     include "../include/footer.php"; 
+    
+    include "../include/footer.php"; 
     
 } else {
 // 비로그인 유저 메뉴
