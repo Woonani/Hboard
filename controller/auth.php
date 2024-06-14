@@ -16,8 +16,15 @@ if(isset($_POST['mode']) && $_POST['mode'] == 'login') {
             $_SESSION['login_user_id'] = $result['data']['user_id'];
             $_SESSION['login_user_name'] = $result['data']['username'];
             $_SESSION['islogin'] = 'loginned';
-            $redirect_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
-            header("Location: $redirect_url");
+
+            if($result['data']['user_id'] == 'admin'){
+                header("Location: /admi/index.php");
+                // header("Location: /admin/index.php");
+            } else {
+
+                $redirect_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
+                header("Location: $redirect_url");
+            }
             exit();
             
         } else {
@@ -31,7 +38,7 @@ if(isset($_POST['mode']) && $_POST['mode'] == 'login') {
 } else if (isset($_GET['mode']) && $_GET['mode'] == 'logout') {
     session_destroy();
     echo "로그아웃 컨트롤러";
-    header("Location: http://test.hackers.com/index.html");
+    header("Location: http://test.hackers.com/index.php");
     exit();
 }
 

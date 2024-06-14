@@ -106,14 +106,28 @@ document.addEventListener("DOMContentLoaded", ()=>{
     })
 
     // 이메일 형식 확인
-    let emailAddr = signInForm.email1.value.trim() + "@" + signInForm.email2.value.trim();
-    const regEmail = /^[a-zA-Z0-9]+@[a-zA-Z]+\.(com|net|org|ac\.kr)$/;
+    signInForm.email1.addEventListener("blur",()=>{
+        let emailAddr = signInForm.email1.value.trim();
+        const regEmail = /^[a-zA-Z0-9]$/;
 
-    if (!regEmail.test(emailAddr)) {
-        alert("형식에 맞지 않는 이메일 입니다.");
-        return false;
-    }
+        if (signInForm.email1.value!="" && !regEmail.test(emailAddr)) {
+            alert("형식에 맞지 않는 이메일 입니다. \n example@example.com");
+            signInForm.email1.value="";
+            signInForm.email1.focus();
+            return false;
+        }
+    });
+    signInForm.email2.addEventListener("blur",()=>{
+        let emailAddr = signInForm.email2.value.trim();
+        const regEmail = /^[a-zA-Z]+\.(com|net|org|ac\.kr)$/;
 
+        if (signInForm.email2.value!="" && !regEmail.test(emailAddr)) {
+            alert("형식에 맞지 않는 이메일 입니다. \n example@example.com");
+            signInForm.email2.value="";
+            signInForm.email2.focus();
+            return false;
+        }
+    });
 
 
     // signInBtn.addEventListener('submit', (event)=>{
