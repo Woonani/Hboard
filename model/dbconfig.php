@@ -22,6 +22,6 @@ if (mysqli_connect_errno()) {
 //     $result = '접속 실패';
 // }
 
-?>
+
 
 
