@@ -32,7 +32,7 @@
                                 <img id="imgUrl" name="image_url" src="http://via.placeholder.com/144x101" alt="강의이미지" width="144" height="101" />
                             </a>
                             <span id="imgSpan" name="imgSpan" class="tc-brand" >강의 이미지 업로드</span>
-                            <input  type="file" name="photo" id="imgInput" accept="image/*">
+                            <input  type="file" name="imgInput" id="imgInput" accept="image/*">
                             <input hidden type="text" name="lec_seq" >
                         </td>
                         <td class="lecture-txt">
@@ -68,7 +68,7 @@
                                                 <ul class="list-rating-choice">
                                                     <li>
                                                         <label class="input-sp ico">
-                                                            <input type="radio" name="level" value="상" id="" checked="checked"/>
+                                                            <input type="radio" name="level" value="상" id="" />
                                                             <span class="input-txt"name="level" >상</span>
                                                         </label>
                                                         <span>
@@ -77,7 +77,7 @@
                                                     </li>
                                                     <li>
                                                         <label class="input-sp ico">
-                                                            <input type="radio" name="level" value="중" id="" checked="checked"/>
+                                                            <input type="radio" name="level" value="중" id=""/>
                                                             <span class="input-txt"name="level" >중</span>
                                                         </label>
                                                         <span>
@@ -86,7 +86,7 @@
                                                     </li>
                                                     <li>
                                                         <label class="input-sp ico">
-                                                            <input type="radio" name="level" value="하" id="" checked="checked"/>
+                                                            <input type="radio" name="level" value="하" id="" />
                                                             <span class="input-txt"name="level" >하</span>
                                                         </label>
                                                         <span>
@@ -112,12 +112,12 @@
                 </tbody>
             </table>
 
-            <div class="box-btn t-r">
-                <button id="addBtn" class="btn-m">등록</button>
-                <button id="submitAddBtn" class="btn-m">등록 제출</button>
-                <button id="updateBtn"  class="btn-m">수정</button>
-                <button id="submitUpdateBtn" class="btn-m">수정 제출</button>
-                <button id="delBtn"  class="btn-m-dark">삭제</button>
+            <div style="display: flex; justify-content: flex-end;">
+                <button style="margin : 15px 5px;" id="addBtn" class="btn-m">등록</button>
+                <button style="margin : 15px 5px;" id="submitAddBtn" class="btn-m">등록 제출</button>
+                <button style="margin : 15px 5px;" id="updateBtn"  class="btn-m">수정</button>
+                <button style="margin : 15px 5px;" id="submitUpdateBtn" class="btn-m">수정 제출</button>
+                <button style="margin : 15px 5px;" id="delBtn"  class="btn-m-dark">삭제</button>
             </div>
         </form>
             <div class="search-info">
