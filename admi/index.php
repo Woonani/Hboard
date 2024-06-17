@@ -17,6 +17,7 @@ include '../include/top.php';
     } else {
         include "./lecture_manage.html";
     }
+include "../include/footer.php"; 
 
 } else {
     echo("<script>");
@@ -26,7 +27,5 @@ include '../include/top.php';
 
     include "../member/login.html";
 }
-
-include "../include/footer.php"; 
 
 ?>

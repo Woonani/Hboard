@@ -53,7 +53,7 @@
 						<li class="mnu6">
                             <?php					
                                 // 관리자 메뉴
-                                if($_SESSION['login_user_id']=='admin') {	
+                                if(isset($_SESSION['login_user_id']) && $_SESSION['login_user_id']=='admin') {	
                             ?>
 							<a href="#">관리자 메뉴</a>
 							<ul class="nav-sub-lst">
