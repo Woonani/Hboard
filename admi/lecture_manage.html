@@ -29,9 +29,11 @@
                     <tr>
                         <td>
                             <a href="#" class="sample-lecture">
-                                <img name="image_url" src="http://via.placeholder.com/144x101" alt="" width="144" height="101" />
-                                <span class="tc-brand">강의 이미지 업로드</span>
+                                <img id="imgUrl" name="image_url" src="http://via.placeholder.com/144x101" alt="강의이미지" width="144" height="101" />
                             </a>
+                            <span id="imgSpan" name="imgSpan" class="tc-brand" >강의 이미지 업로드</span>
+                            <input  type="file" name="photo" id="imgInput" accept="image/*">
+                            <input hidden type="text" name="lec_seq" >
                         </td>
                         <td class="lecture-txt">
                             <table cellpadding="0" cellspacing="0" class="tbl-col">
@@ -66,29 +68,29 @@
                                                 <ul class="list-rating-choice">
                                                     <li>
                                                         <label class="input-sp ico">
-                                                            <input type="radio" name="level" id="" checked="checked"/>
-                                                            <span class="input-txt">상</span>
+                                                            <input type="radio" name="level" value="상" id="" checked="checked"/>
+                                                            <span class="input-txt"name="level" >상</span>
                                                         </label>
                                                         <span>
-                                                            <span class="star-inner" >상</span>
+                                                            <span class="star-inner" name="level" >상</span>
                                                         </span>
                                                     </li>
                                                     <li>
                                                         <label class="input-sp ico">
-                                                            <input type="radio" name="level" id="" checked="checked"/>
-                                                            <span class="input-txt">상</span>
+                                                            <input type="radio" name="level" value="중" id="" checked="checked"/>
+                                                            <span class="input-txt"name="level" >중</span>
                                                         </label>
                                                         <span>
-                                                            <span class="star-inner" >중</span>
+                                                            <span class="star-inner" name="level" >중</span>
                                                         </span>
                                                     </li>
                                                     <li>
                                                         <label class="input-sp ico">
-                                                            <input type="radio" name="level" id="" checked="checked"/>
-                                                            <span class="input-txt">상</span>
+                                                            <input type="radio" name="level" value="하" id="" checked="checked"/>
+                                                            <span class="input-txt"name="level" >하</span>
                                                         </label>
                                                         <span>
-                                                            <span class="star-inner" >하</span>
+                                                            <span class="star-inner" name="level" >하</span>
                                                         </span>
                                                     </li>
                                             </td>
@@ -111,9 +113,11 @@
             </table>
 
             <div class="box-btn t-r">
-                <a href="#" class="btn-m">등록</a>
-                <a href="#" class="btn-m">수정</a>
-                <a href="#" class="btn-m-dark">삭제</a>
+                <button id="addBtn" class="btn-m">등록</button>
+                <button id="submitAddBtn" class="btn-m">등록 제출</button>
+                <button id="updateBtn"  class="btn-m">수정</button>
+                <button id="submitUpdateBtn" class="btn-m">수정 제출</button>
+                <button id="delBtn"  class="btn-m-dark">삭제</button>
             </div>
         </form>
             <div class="search-info">
@@ -137,42 +141,29 @@
         <table cellpadding="0" cellspacing="0" class="tbl-bbs">
             <caption class="hidden">수강후기</caption>
             <colgroup>
-                <col style="width:8%"/>
-                <col style="width:8%"/>
-                <col style="width:57%"/>
-                <!-- <col style="5*"/> -->
+                <col style="width:5%"/>
                 <col style="width:15%"/>
-                <col style="width:12%"/>
+                <col style="width:50%"/>
+                <col style="width:10%"/>
+                <col style="width:5%"/>
+                <col style="width:15%"/>
             </colgroup>
 
             <thead>
                 <tr>
                     <th scope="col">번호</th>
                     <th scope="col">분류</th>
-                    <th scope="col">제목</th>
-                    <th scope="col">강의만족도</th>
-                    <th scope="col">작성자</th>
+                    <th scope="col">강의명</th>
+                    <th scope="col">강사</th>
+                    <th scope="col">난이도</th>
+                    <th scope="col">생성일</th>
+                    <!-- <th scope="col">작성자</th> -->
                 </tr>
             </thead>
     
-            <tbody>
+            <tbody id="lectureList">
                 <!-- set -->
-                <tr class="bbs-sbj">
-                    <td>1</td>
-                    <td>CS</td>
-                    <td>
-                        <a href="#">
-                            <span class="tc-gray ellipsis_line">수강 강의명 : Beyond Trouble, 조직을 감동시키는 관계의 기술</span>
-                            <strong class="ellipsis_line">절대 후회 없는 강의 예요!</strong>
-                        </a>
-                    </td>
-                    <td>
-                        <span class="star-rating">
-                            <span class="star-inner" style="width:80%"></span>
-                        </span>
-                    </td>
-                    <td class="last">이름</td>
-                </tr>
+                <!-- 동적테이블 생성 -->
                 <!-- //set -->
             </tbody>
         </table>

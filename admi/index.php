@@ -18,6 +18,7 @@ include '../include/top.php';
         include "./lecture_manage.html";
     }
 include "../include/footer.php"; 
+
 } else {
     echo("<script>");
     echo("alert('[관리자페이지] \n잘못된 접근입니다. \n관리자 계정으로 로그인해주세요.');");
@@ -26,7 +27,5 @@ include "../include/footer.php";
 
     include "../member/login.html";
 }
-
-
 
 ?>
