@@ -2,7 +2,7 @@
 session_start();
 
 include '../../model/dbconfig.php';
-include '../../model/admi/lectureInfo.php';
+include '../../model/admin/lectureInfo.php';
 
 if(isset($_SESSION['login_user_id'])&&$_SESSION['login_user_id']=='admin') {
 
