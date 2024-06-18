@@ -10,10 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // 로드시 폼, 버튼 설정 초기화
     disableForm(true); // 폼 막음
-    //   let levels = document.forms["lectureForm"].elements["level"];
-    //   for (let i = 0; i < levels.length; i++) {
-    //     levels[i].disabled = true;
-    //   }
     addBtn.style.display = "block"; // 등록, 수정 버튼 보이기
     updateBtn.style.display = "block";
     submitAddBtn.style.display = "none"; // 등록제출, 수정제출 안보이기
@@ -79,21 +75,36 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // 파일 업로드 이벤트
     imgInput.addEventListener("change", (e) => {
-      // console.log("e", e.target.files[0])
+      
       const file = e.target.files[0];
+
+      if (file.type != "image/png" && file.type != "image/jpeg") {
+        alert("JPG 또는 PNG 형식의 파일만 업로드할 수 있습니다.");
+        return;
+      }
+
+      if (file.size > 64/1024*1.5) {
+        alert('파일용량이 너무 큽니다. 60kb 미만의 파일을 올려주세요.')
+        return ;
+      }
+      
       const reader = new FileReader();
-      reader.readAsDataURL(file);
+
       reader.onload = (event) => {
-        // console.log("업로드이벤트", event)
-        const imgUrl = document.querySelector("#imgUrl");
-        imgUrl.setAttribute("src", event.target.result);
+        lectureForm.imgUrl.setAttribute("src", event.target.result);
       };
+
+      reader.onerror = (error) => {
+        console.error("파일을 읽는 중 오류가 발생했습니다: ", error);
+      };
+
+      reader.readAsDataURL(file);
+
     });
   
     // 등록 버튼
     addBtn.addEventListener("click", (e) => {
       e.preventDefault(); // 폼 전송 방지
-      console.log("등록 버튼");
   
       lectureForm.reset();
       lectureForm.imgInput.value = "";
@@ -122,11 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
           level: lectureForm.level.value,
           time: lectureForm.time.value,
           chapter: lectureForm.chapter.value,
-          image_url: lectureForm.imgInput.value,
+          image_url: lectureForm.imgUrl.src,
           tag_no: lectureForm.tag_no.value,
         });
   
-        console.log("data체크 : ", data);
         await setLectureInfo(data);
       }
     });
@@ -155,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
           level: lectureForm.level.value,
           time: lectureForm.time.value,
           chapter: lectureForm.chapter.value,
-          image_url: lectureForm.imgInput.value,
+          image_url: lectureForm.imgUrl.src,
           tag_no: lectureForm.tag_no.value,
         });
         console.log("수정 data : ", data);
@@ -263,7 +273,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((data) => {
         if (data.status) {
           alert("등록 완료.");
-          // location.href = "../../admin/index.php";
+          location.href = "../../admin/index.php";
         } else {
           alert("오류발생! 다시 시작해 주세요");
         }
