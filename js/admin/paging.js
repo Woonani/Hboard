@@ -7,6 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let plateNum = 1;
   getPagingBar(plateNum);
 
+  pNumBox.addEventListener("click", (event) => {
+    const pageNum = event.target.value;
+    getLectureList(pageNum);
+  });
+
   beforeBtn.addEventListener("click", () => {
     plateNum = --plateNum < 0 ? 1 : --plateNum;
     getPagingBar(plateNum);
@@ -28,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
           let rows = [];
 
           for (let i = data.startPage; i <= data.lastPage; i++) {
-            const row = `<a id="p"+${i} value=${i} href="#">${i}</a>`;
+            const row = `<a id="p${i}" value=${i} href="#">${i}</a>`;
             rows.push(row);
           }
 
@@ -38,5 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       })
       .catch((error) => console.error("Error:", error));
+  }
+
+  // List 가져오는 비동기함수
+  function getLectureList(pageNum) {
+    // 작성 예정
   }
 });
