@@ -7,7 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const updateBtn = document.querySelector("#updateBtn");
     const submitUpdateBtn = document.querySelector("#submitUpdateBtn");
     const delBtn = document.querySelector("#delBtn");
-  
+    const searchBtn = document.querySelector("#searchBtn");
+    const tagSelect = document.querySelector("#tagSelect");
+    const wordSelect = document.querySelector("#wordSelect");
+    const wordInput = document.querySelector("#wordInput");
+    const pageSelect = document.querySelector("#pageSelect");
+
     // 로드시 폼, 버튼 설정 초기화
     disableForm(true); // 폼 막음
     addBtn.style.display = "block"; // 등록, 수정 버튼 보이기
@@ -37,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       })
       .catch((error) => console.error("Error:", error));
+  
   
     lectureList.addEventListener("click", async (event) => {
       const target = event.target;
@@ -207,6 +213,43 @@ document.addEventListener("DOMContentLoaded", () => {
       lectureForm.time.disabled = tf;
       lectureForm.chapter.disabled = tf;
     }
+
+
+    // 검색 기능
+    searchBtn.addEventListener('click', ()=>{
+      console.log("tagSelect 확인 : ", tagSelect.value)
+      console.log("wordSelect 확인 : ", wordSelect.value)
+      console.log("wordInput 확인 : ", wordInput.value)
+      let page = pageSelect.value;
+      let tag_no =  tagSelect.value;
+      let col =  wordSelect.value;
+      let word = wordInput.value;
+      fetch(`../../controller/admin/lecture_manage.php?page=${page}&tag_no=${tag_no}&col=${col}&word=${word}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          if (data.status) {
+            
+            const rows = data.data.map((data, idx) => {
+              const row = `<tr id="${data.lec_seq}"style="cursor:pointer" class="bbs-sbj">
+                    <td>${data.lec_seq}</td><td>${data.category}</td><td>${data.lec_name}</td>
+                    <td>${data.instructor}</td><td>${data.level}</td><td>${data.created_at}</td></tr>`;
+              return row;
+            });
+    
+            lectureList.innerHTML = rows.join("");
+          } else {
+            console.log("데이터 조회 실패");
+          }
+        })
+        .catch((error) => console.error("Error:", error));
+    })
+
+
+
+    // -----DOMContentLoaded---------------- 끝
   });
   
   // 강의 정보 불러오기 함수
