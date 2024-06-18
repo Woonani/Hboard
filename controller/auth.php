@@ -18,7 +18,7 @@ if(isset($_POST['mode']) && $_POST['mode'] == 'login') {
             $_SESSION['islogin'] = 'loginned';
 
             if($result['data']['user_id'] == 'admin'){
-                header("Location: /admi/index.php");
+                header("Location: /admin/index.php");
                 // header("Location: /admin/index.php");
             } else {
 

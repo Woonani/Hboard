@@ -12,7 +12,7 @@ include '../include/top.php';
         if(file_exists($file)) {
             include $file;
         } else {
-            echo("<script>location.href='/admi/index.php';</script>");
+            echo("<script>location.href='/admin/index.php';</script>");
         } 
     } else {
         include "./lecture_manage.html";

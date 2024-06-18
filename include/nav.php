@@ -57,7 +57,7 @@
                             ?>
 							<a href="#">관리자 메뉴</a>
 							<ul class="nav-sub-lst">
-								<li><a href="http://test.hackers.com/admi/index.php">강의 관리</a></li>
+								<li><a href="http://test.hackers.com/admin/index.php">강의 관리</a></li>
 							</ul>
                             <?php		
                                 } else {
