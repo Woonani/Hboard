@@ -1,4 +1,4 @@
-console.log("js파일 불러옴")
+// console.log("js파일 불러옴")
 document.addEventListener("DOMContentLoaded", ()=>{
     const chkBtn01 = document.querySelector("#member_chk01")
     const chkBtn02 = document.querySelector("#member_chk02")

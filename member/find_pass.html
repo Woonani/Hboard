@@ -1,0 +1,118 @@
+<style>
+	.form-container {
+		display: none;
+	}
+</style>
+<script src="../../js/member/find_pass.js"></script>
+<div id="container" class="container-full"></div>
+    <div id="content" class="content">
+        <div class="inner">
+            <div class="tit-box-h3">
+                <h3 class="tit-h3">아이디/비밀번호 찾기</h3>
+                <div class="sub-depth">
+                    <span><i class="icon-home"><span>홈</span></i></span>
+                    <strong>아이디/비밀번호 찾기</strong>
+                </div>
+            </div>
+
+            <ul class="tab-list">
+                <li><a href="http://test.hackers.com/member/index.php?mode=find_id">아이디 찾기</a></li>
+                <li class="on"><a href="#">비밀번호 찾기</a></li>
+            </ul>
+
+            <div class="tit-box-h4">
+                <h3 class="tit-h4">비밀번호 찾기 방법 선택</h3>
+            </div>
+
+            <dl class="find-box">
+                <dt>휴대폰 인증</dt>
+                <dd>
+                    고객님이 회원 가입 시 등록한 휴대폰 번호와 입력하신 휴대폰 번호가 동일해야 합니다.
+                    <label class="input-sp big">
+                        <input type="radio" name="radio"  id="byPhone"checked="checked"/>
+                        <span class="input-txt"></span>
+                    </label>
+                </dd>
+            </dl>
+
+            <dl class="find-box">
+                <dt>이메일 인증</dt>
+                <dd>
+                    고객님이 회원 가입 시 등록한 이메일 주소와 입력하신 이메일 주소가 동일해야 합니다.
+                    <label class="input-sp big">
+                        <input type="radio" name="radio" id="byEmail"/>
+                        <span class="input-txt"></span>
+                    </label>
+                </dd>
+            </dl>
+
+            <div class="section-content mt30">
+                <form id = "findForm">
+                <table  cellpadding="0" cellspacing="0" class="tbl-col-join">
+                    <caption class="hidden">비밀번호 찾기 개인정보입력</caption>
+                    <colgroup>
+                        <col style="width:15%"/>
+                        <col />
+                    </colgroup>
+
+                    <tbody>
+                        <tr>
+                            <th scope="col">아이디</th>
+                            <td><input name="id" type="text" class="input-text" style="width:302px" /></td>
+                        </tr>
+                        <tr id="phoneForm" class="form-container" style="display: table-row;">
+                            <th scope="col">핸드폰번호</th>
+                            <td>
+                                <input name="num1" type="text" class="input-text" name="phone_num_first" style="width:138px" required/> - 
+                                <input name="num2" type="text" class="input-text" name="phone_num_middele" style="width:138px" required/> -
+                                <input name="num3" type="text" class="input-text" name="phone_num_last" style="width:138px" required/>
+                                <a href="#" class="btn-s-tin ml10" id="getNumByPhone">인증번호 받기</button>
+                            </td>
+                        </tr>
+                        <tr id="emailForm" class="form-container">
+                            <th scope="col">이메일주소</th>
+                            <td>
+                                <input name="email1" type="text" class="input-text" style="width:138px"/> @ <input name="email2" type="text" class="input-text" style="width:138px"/>
+                                <select name="emailSelect"  class="input-sel" style="width:160px">
+                                    <option value="">직접입력</option>
+                                    <option value="example.com">example.com</option>
+                                    <option value="naver.com">naver.com</option>
+                                    <option value="gmail.com">gmail.com</option>
+                                </select>
+                                <a href="#" class="btn-s-tin ml10" id="getNumByEmail">인증번호 받기</a>
+                            </td>
+                        </tr>
+                        <tr id="commonAuthForm" class="form-container">
+                            <th scope="col">인증번호</th>
+                            <td><input name="authNumInput" type="text" class="input-text" style="width:478px" />
+                                <a  name="authNumBtn" id="authNumBtn" href="#" class="btn-s-tin ml10">인증번호 확인</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+	document.getElementById('byPhone').addEventListener('click', function() {
+		document.getElementById('phoneForm').style.display = 'table-row';
+		document.getElementById('emailForm').style.display = 'none';
+	});
+
+	document.getElementById('byEmail').addEventListener('click', function() {
+		document.getElementById('phoneForm').style.display = 'none';
+		document.getElementById('emailForm').style.display = 'table-row';
+	});
+
+	// Initialize the correct form on page load
+	window.onload = function() {
+		if (document.getElementById('byPhone').checked) {
+			document.getElementById('phoneForm').style.display = 'table-row';
+			document.getElementById('emailForm').style.display = 'none';
+		} else {
+			document.getElementById('phoneForm').style.display = 'none';
+			document.getElementById('emailForm').style.display = 'table-row';
+		}
+	}
+</script>

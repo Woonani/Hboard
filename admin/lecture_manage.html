@@ -1,0 +1,179 @@
+<script src="../js/admin/lecture_manage.js"></script>
+<script src="../js/admin/listPaging.js"></script>
+
+<div id="container" class="container">
+    <div id="content" class="content">
+        <div class="tit-box-h3">
+            <h3 class="tit-h3">강의관리</h3>
+            <div class="sub-depth">
+                <span><i class="icon-home"><span>홈</span></i></span>
+                <span>관리자메뉴</span>
+                <strong>강의관리</strong>
+            </div>
+        </div>
+
+
+        
+        
+        <p class="mb15"><strong class="tc-brand fs16">강의정보 등록/수정/삭제</strong></p>
+        
+        <form id="lectureForm">
+
+            <table cellpadding="0" cellspacing="0" class="tbl-lecture-list">
+                <caption class="hidden">강의정보</caption>
+                <colgroup>
+                    <col style="width:25%"/>
+                    <col style="width:70%"/>
+                    <col style="width:5%"/>
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="#" class="sample-lecture">
+                                <img id="imgUrl" name="image_url" src="http://via.placeholder.com/144x101" alt="강의이미지" width="144" height="101" />
+                            </a>
+                            <span id="imgSpan" name="imgSpan" class="tc-brand" style="cursor:pointer">강의 이미지 업로드</span>
+                            <input hidden type="file" name="imgInput" id="imgInput" accept="image/*">
+                            <input hidden type="text" name="lec_seq" >
+                        </td>
+                        <td class="lecture-txt">
+                            <table cellpadding="0" cellspacing="0" class="tbl-col">
+                                    <caption class="hidden">강의정보</caption>
+                                    <colgroup>
+                                        <col style="width:15%"/>
+                                        <col style="width:75%"/>
+                                    </colgroup>
+                        
+                                    <tbody>
+                                        <tr>
+                                            <th scope="col">강의명</th>
+                                            <td>
+                                                <select name="tag_no" class="input-sel" style="width:25%">
+                                                    <option value="0">분류</option>
+                                                    <option value="1"> 일반직무</option>
+                                                    <option value="2">산업직무</option>
+                                                    <option value="3">공통역량</option>
+                                                    <option value="4">어학 및 자격증</option>
+                                                </select>
+                                                <input name="lec_name" type="text" class="input-text" style="width:65%"/>
+                                            </input>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">강사</th>
+                                            <td><input name="instructor" type="text" class="input-text" style="width:90%"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">학습난이도</th>
+                                            <td>
+                                                <ul class="list-rating-choice">
+                                                    <li>
+                                                        <label class="input-sp ico">
+                                                            <input type="radio" name="level" value="상" id="" />
+                                                            <span class="input-txt"name="level" >상</span>
+                                                        </label>
+                                                        <span>
+                                                            <span class="star-inner" name="level" >상</span>
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <label class="input-sp ico">
+                                                            <input type="radio" name="level" value="중" id=""/>
+                                                            <span class="input-txt"name="level" >중</span>
+                                                        </label>
+                                                        <span>
+                                                            <span class="star-inner" name="level" >중</span>
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <label class="input-sp ico">
+                                                            <input type="radio" name="level" value="하" id="" />
+                                                            <span class="input-txt"name="level" >하</span>
+                                                        </label>
+                                                        <span>
+                                                            <span class="star-inner" name="level" >하</span>
+                                                        </span>
+                                                    </li>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">교육시간</th>
+                                            <td>
+                                                <input name="time" type="text" class="input-text"  />
+                                                <span class="input-txt">시간</span>
+                                                <input name="chapter" type="text" class="input-text" />
+                                                <span class="input-txt">강</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                            </table>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="display: flex; justify-content: flex-end;">
+                <button style="margin : 15px 5px;" id="addBtn" class="btn-m">등록</button>
+                <button style="margin : 15px 5px;" id="submitAddBtn" class="btn-m">등록 제출</button>
+                <button style="margin : 15px 5px;" id="updateBtn"  class="btn-m">수정</button>
+                <button style="margin : 15px 5px;" id="submitUpdateBtn" class="btn-m">수정 제출</button>
+                <button style="margin : 15px 5px;" id="delBtn"  class="btn-m-dark">삭제</button>
+            </div>
+        </form>
+            <div class="search-info">
+                <div class="search-form f-r">
+                    <select id="tagSelect" class="input-sel" style="width:158px">
+                        <option value="0">분류</option>
+                        <option value="1"> 일반직무</option>
+                        <option value="2">산업직무</option>
+                        <option value="3">공통역량</option>
+                        <option value="4">어학 및 자격증</option>
+                    </select>
+                    <select id="wordSelect" class="input-sel" style="width:158px">
+                        <option value="lec_name">강의명</option>
+                        <option value="instructor">강사명</option>
+                    </select>
+                    <input id="wordInput" type="text" class="input-text" placeholder="강의명을 입력하세요." style="width:158px"/>
+                    <button id="searchBtn" type="button" class="btn-s-dark">검색</button>
+                </div>
+            </div>
+        
+        <table cellpadding="0" cellspacing="0" class="tbl-bbs">
+            <caption class="hidden">수강후기</caption>
+            <colgroup>
+                <col style="width:5%"/>
+                <col style="width:15%"/>
+                <col style="width:50%"/>
+                <col style="width:10%"/>
+                <col style="width:5%"/>
+                <col style="width:15%"/>
+            </colgroup>
+
+            <thead>
+                <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">분류</th>
+                    <th scope="col">강의명</th>
+                    <th scope="col">강사</th>
+                    <th scope="col">난이도</th>
+                    <th scope="col">생성일</th>
+                    <!-- <th scope="col">작성자</th> -->
+                </tr>
+            </thead>
+    
+            <tbody id="lectureList">
+                <!-- set -->
+                <!-- 동적테이블 생성 -->
+                <!-- //set -->
+            </tbody>
+        </table>
+        <div class="box-paging" style="display: flex; justify-content: center;" >
+            <div id="beforeBtn" value="" href="#" style="cursor:pointer"><i class="icon-prev"><span class="hidden">이전페이지</span></i></div>
+            <div id="pNumBox">
+                <!-- 동적 페이지 번호 생성 -->
+            </div>
+            <div id="nextBtn" value="" href="#" style="cursor:pointer"><i class="icon-next"><span class="hidden">다음페이지</span></i></div>
+        </div>
+    </div>
+</div>
