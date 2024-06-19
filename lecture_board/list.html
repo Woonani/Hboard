@@ -1,3 +1,5 @@
+<script src="../js/review/list.js"></script>
+
 	<div id="content" class="content">
 		<div class="tit-box-h3">
 			<h3 class="tit-h3">수강후기</h3>
@@ -18,16 +20,20 @@
 
 		<div class="search-info">
 			<div class="search-form f-r">
-				<select class="input-sel" style="width:158px">
-					<option value="">분류</option>
+				<select id="tagSelect" class="input-sel" style="width:158px">
+					<option value="0">분류</option>
+					<option value="1"> 일반직무</option>
+					<option value="2">산업직무</option>
+					<option value="3">공통역량</option>
+					<option value="4">어학 및 자격증</option>
 				</select>
-				<select class="input-sel" style="width:158px">
-					<option value="">강의명</option>
-					<option value="">작성자</option>
+				<select id="wordSelect" class="input-sel" style="width:158px">
+					<option value="lec_name">강의명</option>
+					<option value="instructor">강사명</option>
 				</select>
-				<input type="text" class="input-text" placeholder="강의명을 입력하세요." style="width:158px"/>
-				<button type="button" class="btn-s-dark">검색</button>
-			</div>
+				<input id="wordInput" type="text" class="input-text" placeholder="강의명을 입력하세요." style="width:158px"/>
+				<button id="searchBtn" type="button" class="btn-s-dark">검색</button>
+		</div>
 		</div>
 
 		<table cellpadding="0" cellspacing="0" class="tbl-bbs">
@@ -50,57 +56,22 @@
 				</tr>
 			</thead>
 	 
-			<tbody>
+			<tbody id="reviewList">
+
 				<!-- set -->
-				<tr class="bbs-sbj">
-					<td><span class="txt-icon-line"><em>BEST</em></span></td>
-					<td>CS</td>
-					<td>
-						<a href="#">
-							<span class="tc-gray ellipsis_line">수강 강의명 : Beyond Trouble, 조직을 감동시키는 관계의 기술</span>
-							<strong class="ellipsis_line">절대 후회 없는 강의 예요!</strong>
-						</a>
-					</td>
-					<td>
-						<span class="star-rating">
-							<span class="star-inner" style="width:80%"></span>
-						</span>
-					</td>
-					<td class="last">이름</td>
-				</tr>
-				<!-- //set -->
-				<!-- set -->
-				<tr class="bbs-sbj">
-					<td>1</td>
-					<td>CS</td>
-					<td>
-						<a href="http://test.hackers.com/lecture_board/index.php?mode=view">
-							<span class="tc-gray ellipsis_line">수강 강의명 : Beyond Trouble, 조직을 감동시키는 관계의 기술</span>
-							<strong class="ellipsis_line">절대 후회 없는 강의 예요!</strong>
-						</a>
-					</td>
-					<td>
-						<span class="star-rating">
-							<span class="star-inner" style="width:80%"></span>
-						</span>
-					</td>
-					<td class="last">이름</td>
-				</tr>
+				<!-- 동적테이블 생성 -->
 				<!-- //set -->
 			</tbody>
 		</table>
 
-		<div class="box-paging">
-			<a href="#"><i class="icon-first"><span class="hidden">첫페이지</span></i></a>
-			<a href="#"><i class="icon-prev"><span class="hidden">이전페이지</span></i></a>
-			<a href="#" class="active">1</a>
-			<a href="#">2</a>
-			<a href="#">3</a>
-			<a href="#">4</a>
-			<a href="#">5</a>
-			<a href="#">6</a>
-			<a href="#"><i class="icon-next"><span class="hidden">다음페이지</span></i></a>
-			<a href="#"><i class="icon-last"><span class="hidden">마지막페이지</span></i></a>
+		<div class="box-paging" style="display: flex; justify-content: center;" >
+			<a id="firstBtn" href="#"><i class="icon-first"><span class="hidden">첫페이지</span></i></a>
+            <div id="beforeBtn" value="" href="#" style="cursor:pointer"><i class="icon-prev"><span class="hidden">이전페이지</span></i></div>
+            <div id="pNumBox">
+                <!-- 동적 페이지 번호 생성 -->
+            </div>
+            <div id="nextBtn" value="" href="#" style="cursor:pointer"><i class="icon-next"><span class="hidden">다음페이지</span></i></div>
+			<a id="lastBtn" href="#"><i class="icon-last"><span class="hidden">마지막페이지</span></i></a>
 		</div>
 
 		<div class="box-btn t-r">

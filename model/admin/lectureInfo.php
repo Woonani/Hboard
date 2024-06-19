@@ -96,7 +96,7 @@ function getLectureInfo () {
     return $result;
 }
 
-// 강의 정보 한개 view 가져오는 함수
+// 강의 정보 한개 가져오는 함수
 function getLectureInfoOne ($seq) {
     global $conn;
 
