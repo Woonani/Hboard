@@ -2,7 +2,7 @@
 // echo "로그인 model";
 
 function login($data) {
-global $conn;
+    global $conn;
     $result = array();
 
     // include __DIR__ .'/dbconfig.php'; 
