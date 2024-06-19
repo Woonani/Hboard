@@ -1,0 +1,93 @@
+## /model/dbconfig.php 생성
+<?php
+// phpinfo();
+$hostname = "";  //IP
+$username = "";         // MySQL 사용자 이름
+$password = "";         // MySQL 비밀번호
+$database = "Hboard";   // 데이터베이스 이름
+$port = "3306";         // 데이터베이스 이름
+
+// MySQL 연결 생성
+$conn = mysqli_connect($hostname, $username, $password, $database, $port); 
+
+// Check connection
+if (mysqli_connect_errno()) {
+    echo $hostname."Failed to connect to MySQL: " . mysqli_connect_error();
+    exit();
+}
+
+?>
+
+## 테이블 생성문
+
+CREATE TABLE Users (
+    id INT AUTO_INCREMENT PRIMARY KEY,             -- 유일한 ID를 위한 기본 키
+    username VARCHAR(50) NOT NULL,                 -- 사용자 이름
+    user_id VARCHAR(50) NOT NULL,                 -- 사용자 아이디
+    password VARCHAR(255) NOT NULL,                -- 비밀번호 (암호화된 형태로 저장)
+    email VARCHAR(100) NOT NULL,                   -- 이메일 주소
+    mobile_phone VARCHAR(15) NOT NULL,             -- 휴대폰 번호
+    home_phone VARCHAR(15),                        -- 일반 전화번호 (선택 사항)
+    postal_code VARCHAR(10),                       -- 우편번호
+    address VARCHAR(255),                          -- 기본 주소
+    address_detail VARCHAR(255),                   -- 상세 주소
+    sms_opt BOOLEAN DEFAULT TRUE,              -- SMS 수신 여부 (기본값: 수신 안 함)
+    email_opt BOOLEAN DEFAULT TRUE,            -- 메일 수신 여부 (기본값: 수신 안 함)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 생성 시간
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 수정 시간
+);
+
+CREATE TABLE Lectures (
+    lec_seq INT AUTO_INCREMENT PRIMARY KEY,				-- 강의seq
+    lec_name VARCHAR(255) NOT NULL,					-- 강의명
+    instructor VARCHAR(255) NOT NULL,				-- 강사명
+    level VARCHAR(10) NOT NULL,						-- 학습난이도
+    time INT NOT NULL,								-- 교육시간
+    chapter INT NOT NULL,							-- 강의 수
+    image_url TEXT NOT NULL,				-- 강의이미지url
+    tag_no VARCHAR(10) NOT NULL,					-- 분류코드 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 생성 시간
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 	-- 수정 시간
+);
+
+CREATE TABLE Tags (
+    seq INT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(255) NOT NULL UNIQUE,
+    category VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Reviews (
+    rev_seq INT AUTO_INCREMENT PRIMARY KEY,			-- 리뷰seq
+    rev_title VARCHAR(255) NOT NULL,				-- 후기제목
+    contents TEXT NOT NULL,							-- 내용
+    rating VARCHAR(10) NOT NULL,							-- 강의만족도
+    lec_seq INT NOT NULL,							-- (왜래키) 강의seq
+    author INT NOT NULL,							-- (왜래키) 작성자seq
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 생성 시간
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 수정 시간
+    FOREIGN KEY (author) REFERENCES Users(id),		
+    FOREIGN KEY (lec_seq) REFERENCES Lectures(lec_seq)
+);
+
+## 테이블 데이터
+
+INSERT INTO Users (username, user_id, password, email, mobile_phone, home_phone
+, postal_code, address, address_detail, sms_opt, email_opt)
+VALUES ('관리자', 'admin', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'admin@example.com', '010-1234-5678', '02-1234-5678'
+, '06616', '서울 서초구 강남대로61길 23', '현대성우빌딩 1층', TRUE, TRUE);
+
+INSERT INTO Users (username, user_id, password, email, mobile_phone, home_phone
+, postal_code, address, address_detail, sms_opt, email_opt)
+VALUES ('학생', 'student', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'student1@example.com', '010-9876-5432', NULL
+, '06608', '서울 서초구 서운로 197', '101동 101호', false, TRUE);
+
+
+insert into lectures( lec_name, instructor, level, time, chapter, image_url, tag_no, created_at, updated_at)
+(select lec_name, instructor, level, time, chapter, image_url, tag_no, created_at, updated_at from lectures);
+select count(lec_seq) from lectures;
+
+INSERT INTO Tags (code, category) VALUES ('1', '일반직무');
+INSERT INTO Tags (code, category) VALUES ('2', '산업직무');
+INSERT INTO Tags (code, category) VALUES ('3', '공통역량');
+INSERT INTO Tags (code, category) VALUES ('4', '어학 및 자격증');
+

@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // 인증 진행
-        fetch("../../controller/find.php", {
+        fetch("../../controller/member/find.php", {
             method: "POST",
             cache: "no-cache",
             headers: {
@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // 가입자 확인 & 인증번호 전송 요청 함수
 function sendAuthNum (params) {
 
-    fetch("../../controller/find.php", {
+    fetch("../../controller/member/find.php", {
         method: "POST",
         cache: "no-cache",
         headers: {

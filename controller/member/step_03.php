@@ -1,13 +1,7 @@
 <?php
 session_start();
-// include $_SERVER['DOCUMENT_ROOT'] . 'model/dbconfig.php'; // ~~T'] . '/model/dbconfig.php'; 오류남
-// include $_SERVER['DOCUMENT_ROOT'] . 'model/dbconfig.php';
-// include '../model/dbconfig.php'; //'../model/dbconfig.php'; 는 오류남
-include '../model/dbconfig.php'; 
-include '../model/signin.php'; 
-
-
-
+include '../../model/dbconfig.php'; 
+include '../../model/member/signin.php'; 
 
 if($_SERVER['REQUEST_METHOD'] === 'GET') {
     header('Content-Type: application/json');
