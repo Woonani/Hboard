@@ -1,5 +1,9 @@
 <script src="../js/admin/lecture_manage.js"></script>
+<<<<<<< HEAD
 <script src="../js/admin/paging.js"></script>
+=======
+<script src="../js/admin/listPaging.js"></script>
+>>>>>>> daee471aca08b7bf002c7b8bc6bb8ebad92709b2
 
 <div id="container" class="container">
     <div id="content" class="content">
@@ -56,7 +60,7 @@
                                                     <option value="4">어학 및 자격증</option>
                                                 </select>
                                                 <input name="lec_name" type="text" class="input-text" style="width:65%"/>
-                                            </input>
+                                                </input>
                                             </td>
                                         </tr>
                                         <tr>
@@ -123,19 +127,19 @@
         </form>
             <div class="search-info">
                 <div class="search-form f-r">
-                    <select class="input-sel" style="width:158px">
+                    <select id="tagSelect" class="input-sel" style="width:158px">
                         <option value="0">분류</option>
                         <option value="1"> 일반직무</option>
                         <option value="2">산업직무</option>
                         <option value="3">공통역량</option>
                         <option value="4">어학 및 자격증</option>
                     </select>
-                    <select class="input-sel" style="width:158px">
-                        <option value="">강의명</option>
-                        <option value="">작성자</option>
+                    <select id="wordSelect" class="input-sel" style="width:158px">
+                        <option value="lec_name">강의명</option>
+                        <option value="instructor">강사명</option>
                     </select>
-                    <input type="text" class="input-text" placeholder="강의명을 입력하세요." style="width:158px"/>
-                    <button type="button" class="btn-s-dark">검색</button>
+                    <input id="wordInput" type="text" class="input-text" placeholder="강의명을 입력하세요." style="width:158px"/>
+                    <button id="searchBtn" type="button" class="btn-s-dark">검색</button>
                 </div>
             </div>
         
@@ -168,6 +172,7 @@
                 <!-- //set -->
             </tbody>
         </table>
+<<<<<<< HEAD
 
         <div class="box-paging" style="display: flex; justify-content: center;" >
             <div id="beforeBtn" value="" href="#"><i class="icon-prev"><span class="hidden">이전페이지</span></i></div>
@@ -175,6 +180,14 @@
                 <!-- 동적 페이지 번호 생성 -->
             </div>
             <div id="nextBtn" value="" href="#"><i class="icon-next"><span class="hidden">다음페이지</span></i></div>
+=======
+        <div class="box-paging" style="display: flex; justify-content: center;" >
+            <div id="beforeBtn" value="" href="#" style="cursor:pointer"><i class="icon-prev"><span class="hidden">이전페이지</span></i></div>
+            <div id="pNumBox">
+                <!-- 동적 페이지 번호 생성 -->
+            </div>
+            <div id="nextBtn" value="" href="#" style="cursor:pointer"><i class="icon-next"><span class="hidden">다음페이지</span></i></div>
+>>>>>>> daee471aca08b7bf002c7b8bc6bb8ebad92709b2
         </div>
     </div>
 </div>

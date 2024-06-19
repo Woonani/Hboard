@@ -2,8 +2,8 @@
 
 session_start();
 
-include '../model/dbconfig.php';
-include '../model/login.php';
+include '../../model/dbconfig.php';
+include '../../model/member/login.php';
 
 if(isset($_POST['mode']) && $_POST['mode'] == 'login') {
 

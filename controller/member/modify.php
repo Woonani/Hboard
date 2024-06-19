@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-include '../model/dbconfig.php';
-include '../model/userInfo.php';
+include '../../model/dbconfig.php';
+include '../../model/member/userInfo.php';
 
 if($_SERVER["REQUEST_METHOD"] == "GET") {
     

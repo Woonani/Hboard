@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         // console.log(params.toString());
 
-        fetch("../../controller/step_02.php", {
+        fetch("../../controller/member/step_02.php", {
           method: "POST",
           cache: "no-cache",
           headers: {
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("authNum.value ", authNum.value)
 
     // AJAX로 서버에 인증번호 일치 확인 요청보냄
-    fetch('../../controller/step_02.php', {
+    fetch('../../controller/member/step_02.php', {
         method: 'POST',
         cache: 'no-cache',
         headers: {

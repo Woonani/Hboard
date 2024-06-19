@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const updateBtn = document.querySelector("#updateBtn");
     const submitUpdateBtn = document.querySelector("#submitUpdateBtn");
     const delBtn = document.querySelector("#delBtn");
-  
+
     // 로드시 폼, 버튼 설정 초기화
     disableForm(true); // 폼 막음
     addBtn.style.display = "block"; // 등록, 수정 버튼 보이기
@@ -17,26 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
     addBtn.disabled = false; // 등록 활성화
     updateBtn.disabled = true; // 수정, 삭제 비활성화
     delBtn.disabled = true;
-  
-    fetch("../../controller/admin/lecture_manage.php?mode=list")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        if (data.status) {
-          const rows = data.data.map((data, idx) => {
-            const row = `<tr id="${data.lec_seq}"style="cursor:pointer" class="bbs-sbj">
-                  <td>${data.lec_seq}</td><td>${data.category}</td><td>${data.lec_name}</td>
-                  <td>${data.instructor}</td><td>${data.level}</td><td>${data.created_at}</td></tr>`;
-            return row;
-          });
-  
-          lectureList.innerHTML = rows.join("");
-        } else {
-          console.log("데이터 조회 실패");
-        }
-      })
-      .catch((error) => console.error("Error:", error));
   
     lectureList.addEventListener("click", async (event) => {
       const target = event.target;
@@ -83,7 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      if (file.size > 64/1024*1.5) {
+      console.log("file.size : ", file.size)
+      if (file.size > 60*1024) {
         alert('파일용량이 너무 큽니다. 60kb 미만의 파일을 올려주세요.')
         return ;
       }
@@ -207,29 +188,8 @@ document.addEventListener("DOMContentLoaded", () => {
       lectureForm.time.disabled = tf;
       lectureForm.chapter.disabled = tf;
     }
+
   });
-  
-  // 강의 정보 불러오기 함수
-  function getLectureInfo() {
-    let lectureInfo;
-  
-    fetch("../../controller/admin/lecture_manage.php")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log("data", data);
-        if (data.status) {
-          lectureInfo = data.data;
-          // console.log("lectureInfo",lectureInfo)
-        } else {
-          console.log("데이터 조회 실패");
-        }
-      })
-      .catch((error) => console.error("Error:", error));
-  
-    return lectureInfo;
-  }
   
   // 강의 정보 하나 불러오는 함수
   const getLectureInfoOne = async (seq) => {

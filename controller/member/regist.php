@@ -1,7 +1,7 @@
 <?php
 
-include '../model/dbconfig.php'; 
-include '../model/signin.php'; 
+include '../../model/dbconfig.php'; 
+include '../../model/member/signin.php'; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = $_POST;
