@@ -1,4 +1,5 @@
 <script src="../js/admin/lecture_manage.js"></script>
+<script src="../js/admin/listPaging.js"></script>
 
 <div id="container" class="container">
     <div id="content" class="content">
@@ -167,29 +168,12 @@
                 <!-- //set -->
             </tbody>
         </table>
-        <select id="pageSelect" class="input-sel" style="width:158px">
-            <option value="1">1</option>
-            <option value="2"> 2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-        <div class="box-paging">
-            <a href="#"><i class="icon-first"><span class="hidden">첫페이지</span></i></a>
-            <a href="#"><i class="icon-prev"><span class="hidden">이전페이지</span></i></a>
-            <a href="#" class="active">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#"><i class="icon-next"><span class="hidden">다음페이지</span></i></a>
-            <a href="#"><i class="icon-last"><span class="hidden">마지막페이지</span></i></a>
+        <div class="box-paging" style="display: flex; justify-content: center;" >
+            <div id="beforeBtn" value="" href="#" style="cursor:pointer"><i class="icon-prev"><span class="hidden">이전페이지</span></i></div>
+            <div id="pNumBox">
+                <!-- 동적 페이지 번호 생성 -->
+            </div>
+            <div id="nextBtn" value="" href="#" style="cursor:pointer"><i class="icon-next"><span class="hidden">다음페이지</span></i></div>
         </div>
     </div>
 </div>
