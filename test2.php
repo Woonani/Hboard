@@ -24,7 +24,7 @@ if(!isset($_SESSION['login_user_id'])) {
         } else {
         // 로그인 후
     ?>				
-    <a href="http://test.hackers.com/controller/auth.php?mode=logout">로그아웃</a>
+    <a href="http://test.hackers.com/controller/member/auth.php?mode=logout">로그아웃</a>
     <a href="#">내정보</a>
     <a href="#">상담/고객센터</a>
     <?php 

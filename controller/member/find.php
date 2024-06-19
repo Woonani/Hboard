@@ -1,7 +1,7 @@
 <?php
 session_start();
-include '../model/dbconfig.php';
-include '../model/find.php';
+include '../../model/dbconfig.php';
+include '../../model/member/find.php';
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

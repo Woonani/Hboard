@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const signInBtn = document.querySelector("#signInBtn")
     
     // 페이지 들어오면 휴대전화번호 바인딩
-    fetch('../../controller/step_03.php', {
+    fetch('../../controller/member/step_03.php', {
         method: 'GET',
         cache: 'no-cache',
         headers: {
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             data: signInForm.id.value,
           });
 
-        fetch('../../controller/step_03.php', {
+        fetch('../../controller/member/step_03.php', {
             method: 'POST',
             cache: 'no-cache',
             headers: {
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
       
         // 2. 폼전송        
-        fetch('../controller/regist.php', {
+        fetch('../controller/member/regist.php', {
             method: 'POST',
             cache: 'no-cache',
             headers: {

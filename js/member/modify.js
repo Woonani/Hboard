@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // 로그인 유저 정보 불러오기 바로 실행
-    fetch("../../controller/modify.php?mode=enter")
+    fetch("../../controller/member/modify.php?mode=enter")
     .then((res) => res.json())
     .then((data) => {
         // console.log("data ",data);
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(data)
         // 폼전송     
         
-        fetch('../controller/modify.php', {
+        fetch('../controller/member/modify.php', {
             method: 'POST',
             cache: 'no-cache',
             headers: {
@@ -108,7 +108,7 @@ dupChekBtn.addEventListener('click', ()=>{
         data: modifyForm.id.value,
       });
 
-    fetch('../../controller/step_03.php', {
+    fetch('../../controller/member/step_03.php', {
         method: 'POST',
         cache: 'no-cache',
         headers: {
