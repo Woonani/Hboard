@@ -13,10 +13,14 @@ if(isset($_SESSION['login_user_id'])){
     include '../include/side.php';
             
     if (isset($_GET['mode'])) {
-        $file = $_GET['mode'].".html";
-        if(file_exists($file)) {
-            include $file;
-        } else {
+        $fileHtml = $_GET['mode'].".html";
+        $filePhp = $_GET['mode'].".php";
+        if(file_exists($fileHtml)) {
+            include $fileHtml;
+        } else if (file_exists($filePhp)) {
+            include $filePhp;
+
+        } else{
             echo("<script>location.href='/lecture_board/index.php';</script>");
         } 
     } else {

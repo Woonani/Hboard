@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const pNumBox = document.querySelector("#pNumBox");
-    // const firstBtn = document.querySelector("#firstBtn");
     const beforeBtn = document.querySelector("#beforeBtn");
     const nextBtn = document.querySelector("#nextBtn");
+    // const firstBtn = document.querySelector("#firstBtn");
     // const lastBtn = document.querySelector("#lastBtn");
 
     const searchBtn = document.querySelector("#searchBtn");
@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     getPagingBar(plateNum);
     getLectureList(pageNum)
   
+    // 페이지네이션 바 번호 값 가녀오는 이벤트
     pNumBox.addEventListener("click", (event) => {
       let pageNum = event.target.innerText;
       getLectureList(pageNum);
@@ -69,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // 선택된 페이지번호의 강의List 가져오는 함수
     function getLectureList(pageNum) {
-      // 작성 예정
       let tag_no =  tagSelect.value;
       let col =  wordSelect.value;
       let word = wordInput.value;
